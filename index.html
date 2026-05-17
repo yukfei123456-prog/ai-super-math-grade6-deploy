@@ -1,0 +1,3923 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI超级学霸数学6年级</title>
+  <style>
+    :root {
+      --green: #8fded7;
+      --green-soft: #ebfbf9;
+      --green-deep: #2f8188;
+      --blue-soft: #f1fbfd;
+      --blue: #b6ebe7;
+      --pink: #f7bfd5;
+      --pink-soft: #fff1f7;
+      --pink-deep: #c96b91;
+      --ink: #22475b;
+      --muted: #6e8591;
+      --border: #d9ecef;
+      --surface: rgba(255,255,255,0.88);
+      --shadow: 0 20px 50px rgba(55, 125, 130, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(143, 222, 215, 0.22), transparent 30%),
+        radial-gradient(circle at top right, rgba(247, 191, 213, 0.18), transparent 28%),
+        linear-gradient(180deg, #f3fcfc 0%, #eefbfd 52%, #fff8fb 100%);
+    }
+    button, input { font: inherit; }
+    button {
+      border: 0;
+      cursor: pointer;
+      background: transparent;
+      color: inherit;
+    }
+    .app {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+    .topbar, .panel, .module-card, .sidebar, .content-wrap, .detail-toolbar, .report-card, .practice-card, .metric-card, .analysis-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-radius: 28px;
+      padding: 16px 18px;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .meta-pill {
+      border-radius: 18px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .meta-pill.green { background: var(--green-soft); color: var(--green-deep); }
+    .meta-pill.blue { background: var(--blue-soft); color: var(--green-deep); }
+    .unlock-shell {
+      min-height: calc(100vh - 24px);
+      display: grid;
+      place-items: center;
+    }
+    .unlock-shell.hidden, .app.hidden { display: none; }
+    .unlock-card {
+      width: min(760px, 100%);
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.82);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      border-radius: 34px;
+      padding: 28px;
+    }
+    .unlock-hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: center;
+    }
+    .unlock-title {
+      margin-top: 18px;
+      font-size: clamp(30px, 4.6vw, 50px);
+      line-height: 1.08;
+      font-weight: 900;
+    }
+    .unlock-text {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.9;
+      font-weight: 700;
+    }
+    .unlock-panel {
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(235,251,249,0.94), rgba(241,251,253,0.94), rgba(255,241,247,0.9));
+      border: 1px solid rgba(255,255,255,0.8);
+      padding: 18px;
+    }
+    .unlock-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 900;
+      letter-spacing: .12em;
+    }
+    .unlock-input {
+      width: 100%;
+      min-height: 56px;
+      margin-top: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.92);
+      padding: 0 16px;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 800;
+      outline: none;
+    }
+    .unlock-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .unlock-help {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+    .unlock-status {
+      min-height: 24px;
+      margin-top: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+    .unlock-status.error { color: #c2410c; }
+    .unlock-status.ok { color: var(--green-deep); }
+    .unlock-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .unlock-metric {
+      border-radius: 22px;
+      padding: 14px;
+      background: rgba(255,255,255,0.74);
+    }
+    .unlock-metric .small {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .unlock-metric .big {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .home, .detail { margin-top: 16px; }
+    .home.hidden, .detail.hidden, .mobile-overlay.hidden { display: none; }
+    .panel {
+      border-radius: 32px;
+      padding: 20px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green-deep);
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.08;
+    }
+    .lead {
+      margin-top: 14px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      font-weight: 650;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .summary-box {
+      border-radius: 24px;
+      padding: 16px;
+    }
+    .summary-box.green { background: var(--green-soft); }
+    .summary-box.blue { background: var(--blue-soft); }
+    .summary-box.gray { background: #f6fbfc; }
+    .summary-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+    }
+    .summary-value {
+      margin-top: 10px;
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 68px;
+      margin-top: 20px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--pink), #f9d7e5);
+      color: #7a3658;
+      padding: 0 26px;
+      font-size: 20px;
+      font-weight: 900;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .primary-btn:hover { transform: translateY(-1px); background: #f3aac8; }
+    .progress-wrap {
+      display: flex;
+      justify-content: center;
+    }
+    .ring-card {
+      position: relative;
+      width: 210px;
+      height: 210px;
+    }
+    .ring-card svg { transform: rotate(-90deg); }
+    .ring-text {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+    .ring-text strong {
+      display: block;
+      font-size: 44px;
+      line-height: 1;
+      font-weight: 900;
+    }
+    .ring-text span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .outline-panel {
+      margin-top: 16px;
+      border-radius: 32px;
+      padding: 20px;
+    }
+    .outline-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+    }
+    .outline-title {
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .outline-sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      font-weight: 700;
+      max-width: 880px;
+    }
+    .outline-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .outline-chapter {
+      border-radius: 26px;
+      padding: 18px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid var(--border);
+    }
+    .outline-chapter-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+    .outline-chapter h3 {
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .outline-count {
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: var(--green-soft);
+      color: var(--green-deep);
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .outline-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .outline-item {
+      width: 100%;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: #fbffff;
+      padding: 14px;
+      text-align: left;
+    }
+    .outline-item-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+    .outline-item-label {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.55;
+    }
+    .outline-status {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .outline-status.exact {
+      background: var(--green-soft);
+      color: var(--green-deep);
+    }
+    .outline-status.mapped {
+      background: var(--pink-soft);
+      color: var(--pink-deep);
+    }
+    .outline-status.missing {
+      background: #fff5e8;
+      color: #c77a25;
+    }
+    .outline-meta {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+    .module-card {
+      border-radius: 28px;
+      padding: 20px;
+      text-align: left;
+      transition: transform .2s ease;
+    }
+    .module-card:hover { transform: translateY(-3px); }
+    .module-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .module-label {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--green-deep);
+      background: var(--green-soft);
+    }
+    .module-card h3 {
+      margin-top: 14px;
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .module-card p {
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      min-height: 48px;
+    }
+    .module-count {
+      border-radius: 18px;
+      background: rgba(255,255,255,0.72);
+      padding: 10px 12px;
+      text-align: right;
+    }
+    .module-count strong {
+      display: block;
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .module-count span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .bar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--muted);
+    }
+    .bar {
+      height: 12px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: rgba(134, 196, 200, 0.18);
+      overflow: hidden;
+    }
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), var(--pink));
+      transition: width .25s ease;
+    }
+
+    .detail-layout {
+      display: grid;
+      grid-template-columns: 340px minmax(0, 1fr);
+      gap: 16px;
+    }
+    .sidebar {
+      border-radius: 28px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 124px);
+      max-height: calc(100vh - 124px);
+    }
+    .side-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .side-title {
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .side-sub {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .icon-btn, .ghost-btn, .export-btn, .secondary-btn {
+      border-radius: 18px;
+      min-height: 46px;
+      padding: 0 16px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .icon-btn { width: 46px; padding: 0; background: #eef8fa; }
+    .ghost-btn { background: var(--green-soft); color: var(--green-deep); }
+    .export-btn { background: linear-gradient(135deg, var(--pink), #f6cde0); color: #7a3658; }
+    .secondary-btn { background: var(--blue-soft); color: var(--green-deep); }
+    .management-wrap {
+      display: grid;
+      gap: 16px;
+    }
+    .management-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+    }
+    .management-card {
+      border-radius: 28px;
+      padding: 20px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: var(--shadow);
+    }
+    .management-title {
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .management-sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+      font-weight: 700;
+    }
+    .management-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .code-textarea {
+      width: 100%;
+      min-height: 180px;
+      margin-top: 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fbffff;
+      padding: 14px;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      line-height: 1.7;
+      resize: vertical;
+      outline: none;
+    }
+    .status-box {
+      margin-top: 14px;
+      border-radius: 18px;
+      background: #f5fbfc;
+      border: 1px solid var(--border);
+      padding: 14px;
+      color: #426271;
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+    .code-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    .code-table th, .code-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+    .code-table th {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      background: #f0fbfb;
+    }
+    .code-table tr:last-child td { border-bottom: 0; }
+    .tiny-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border-radius: 999px;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 900;
+      background: var(--green-soft);
+      color: var(--green-deep);
+    }
+    .tiny-chip.warn {
+      background: var(--pink-soft);
+      color: var(--pink-deep);
+    }
+    .tiny-chip.info {
+      background: var(--blue-soft);
+      color: var(--green-deep);
+    }
+    .readonly-banner {
+      margin-top: 14px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(241,251,253,0.96), rgba(255,241,247,0.94), rgba(255,255,255,0.98));
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+    }
+    .readonly-banner strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .readonly-banner p {
+      margin-top: 8px;
+      color: #426271;
+      font-size: 14px;
+      line-height: 1.75;
+      font-weight: 700;
+    }
+    .parent-report-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .parent-stat {
+      border-radius: 22px;
+      padding: 16px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--border);
+    }
+    .parent-stat .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .parent-stat .value {
+      margin-top: 10px;
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .search-wrap {
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #f5fbfc;
+      padding: 12px 14px;
+    }
+    .search-wrap input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .tree {
+      flex: 1;
+      margin-top: 14px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+    .tree::-webkit-scrollbar { width: 10px; }
+    .tree::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(112, 178, 181, 0.32);
+    }
+    .cat {
+      margin-bottom: 10px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.88);
+      padding: 10px;
+    }
+    .cat-btn, .sub-btn {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      text-align: left;
+      font-weight: 900;
+    }
+    .cat-btn:hover, .sub-btn:hover { background: var(--green-soft); }
+    .cat-title { font-size: 15px; }
+    .cat-meta, .sub-meta {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .sub-wrap {
+      margin-top: 8px;
+      border-radius: 18px;
+      background: #f5fbfc;
+      padding: 8px;
+    }
+    .sub-title { font-size: 14px; font-weight: 900; }
+    .topic-list { margin-top: 8px; }
+    .topic {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 8px;
+      border: 1px solid transparent;
+      border-radius: 18px;
+      background: #fff;
+      padding: 12px;
+      transition: background .18s ease, border-color .18s ease, transform .18s ease;
+    }
+    .topic:hover { transform: translateY(-1px); }
+    .topic.active {
+      border-color: rgba(201, 107, 145, 0.38);
+      background: rgba(255, 241, 247, 0.9);
+    }
+    .topic input {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--green);
+    }
+    .topic-btn {
+      text-align: left;
+      min-width: 0;
+    }
+    .topic-name {
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+    .topic-grade {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .tick {
+      margin-top: 2px;
+      color: var(--pink-deep);
+      font-size: 18px;
+      font-weight: 900;
+      min-width: 18px;
+      text-align: center;
+    }
+    .detail-main {
+      min-width: 0;
+    }
+    .detail-toolbar {
+      border-radius: 28px;
+      padding: 18px;
+    }
+    .toolbar-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .toolbar-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+    .current-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .current-topic {
+      margin-top: 4px;
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .content-wrap {
+      margin-top: 16px;
+      border-radius: 28px;
+      padding: 14px;
+      content-visibility: auto;
+      contain-intrinsic-size: 760px;
+    }
+    .mode-tabs {
+      display: inline-flex;
+      gap: 6px;
+      padding: 6px;
+      border-radius: 18px;
+      background: #eef8fa;
+    }
+    .mode-tab {
+      border-radius: 14px;
+      min-height: 40px;
+      padding: 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .mode-tab.active {
+      background: #fff;
+      color: var(--pink-deep);
+      box-shadow: 0 8px 18px rgba(201, 107, 145, 0.12);
+    }
+    iframe {
+      display: block;
+      width: 100%;
+      height: 72vh;
+      border: 0;
+      border-radius: 22px;
+      background: white;
+    }
+    .practice-wrap, .report-wrap, .wrongbook-wrap {
+      display: grid;
+      gap: 16px;
+    }
+    .practice-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .practice-title {
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .practice-sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+    .practice-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .metric-card {
+      border-radius: 22px;
+      padding: 14px 16px;
+      min-width: 148px;
+    }
+    .metric-card .metric-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .metric-card .metric-value {
+      margin-top: 8px;
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .practice-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .practice-card {
+      border-radius: 24px;
+      padding: 18px;
+    }
+    .question-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .question-title {
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.5;
+    }
+    .question-tag {
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--green-deep);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .question-note {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .choice-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fbffff;
+      padding: 12px;
+    }
+    .choice-item input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--green);
+    }
+    .choice-item span {
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+    .answer-text {
+      width: 100%;
+      min-height: 120px;
+      margin-top: 14px;
+      resize: vertical;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fbffff;
+      padding: 14px;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      line-height: 1.7;
+      outline: none;
+    }
+    .practice-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+    .report-wrap {
+      gap: 18px;
+    }
+    .report-card {
+      border-radius: 28px;
+      padding: 22px;
+    }
+    .report-title {
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .report-date {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .report-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .score-box {
+      border-radius: 22px;
+      padding: 18px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .score-box .label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .score-box .value {
+      margin-top: 8px;
+      font-size: 40px;
+      font-weight: 900;
+    }
+    .report-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .analysis-card {
+      border-radius: 24px;
+      padding: 18px;
+    }
+    .analysis-card h3 {
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .analysis-big {
+      margin-top: 14px;
+      font-size: 46px;
+      font-weight: 900;
+    }
+    .analysis-small {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+    .breakdown-list, .advice-list {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .breakdown-list li, .advice-list li {
+      border-radius: 16px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 750;
+      line-height: 1.7;
+    }
+    .answer-detail-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .answer-detail-card {
+      border-radius: 20px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--border);
+      padding: 16px;
+    }
+    .answer-detail-card.correct {
+      border-color: rgba(143, 222, 215, 0.7);
+    }
+    .answer-detail-card.wrong {
+      border-color: rgba(247, 191, 213, 0.8);
+      background: rgba(255,241,247,0.58);
+    }
+    .answer-detail-title {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.65;
+    }
+    .answer-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .answer-mini {
+      border-radius: 16px;
+      background: #fbffff;
+      border: 1px solid var(--border);
+      padding: 12px;
+    }
+    .answer-mini .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .06em;
+    }
+    .answer-mini .value {
+      margin-top: 6px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.7;
+    }
+    .answer-explain {
+      margin-top: 12px;
+      color: #426271;
+      font-size: 14px;
+      line-height: 1.85;
+      font-weight: 750;
+    }
+    .rate-row {
+      display: grid;
+      grid-template-columns: 84px 1fr 60px;
+      gap: 12px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .rate-label, .rate-value {
+      font-size: 14px;
+      font-weight: 850;
+    }
+    .rate-bar {
+      height: 18px;
+      border-radius: 999px;
+      background: #eaf7f7;
+      overflow: hidden;
+    }
+    .rate-bar > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), var(--pink));
+    }
+    .report-section-title {
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .report-paragraph {
+      margin-top: 14px;
+      color: #406070;
+      font-size: 15px;
+      line-height: 1.95;
+      font-weight: 700;
+    }
+    .report-document {
+      max-width: 860px;
+      margin: 0 auto;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid #e6edf0;
+      padding: clamp(20px, 4vw, 34px);
+      box-shadow: 0 18px 42px rgba(30, 72, 88, 0.08);
+      color: #263844;
+    }
+    .doc-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(22px, 4vw, 30px);
+      line-height: 1.25;
+      font-weight: 950;
+      color: #182d3b;
+    }
+    .doc-section {
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid #e9eef1;
+    }
+    .doc-section:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .doc-heading {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 20px;
+      line-height: 1.35;
+      font-weight: 950;
+      color: #1f3443;
+    }
+    .doc-body {
+      margin-top: 12px;
+      color: #3d4f5b;
+      font-size: 15px;
+      line-height: 1.9;
+      font-weight: 650;
+    }
+    .doc-list {
+      margin: 12px 0 0;
+      padding-left: 22px;
+      color: #384c58;
+      font-size: 15px;
+      line-height: 1.9;
+      font-weight: 650;
+    }
+    .doc-list li { margin-top: 8px; }
+    .doc-list strong { color: #1f3443; font-weight: 950; }
+    .doc-sublist {
+      margin: 6px 0 0;
+      padding-left: 22px;
+    }
+    .wrong-deep-card {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #e9eef1;
+    }
+    .wrong-deep-card:first-child {
+      margin-top: 12px;
+      padding-top: 0;
+      border-top: 0;
+    }
+    .wrong-deep-title {
+      font-size: 17px;
+      line-height: 1.55;
+      font-weight: 950;
+      color: #1b2f3c;
+    }
+    .parent-action-title {
+      margin-top: 16px;
+      font-size: 18px;
+      font-weight: 950;
+      color: #1b2f3c;
+    }
+    .parent-action-title:first-child { margin-top: 12px; }
+    .wrongbook-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .wrongbook-title {
+      font-size: 26px;
+      font-weight: 900;
+    }
+    .wrongbook-sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+      font-weight: 700;
+    }
+    .wrongbook-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .wrong-card {
+      border-radius: 28px;
+      padding: 20px;
+      background: rgba(255,255,255,0.86);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: var(--shadow);
+    }
+    .wrong-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .wrong-title {
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.6;
+    }
+    .wrong-meta {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+    .wrong-chip {
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green-deep);
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .wrong-sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .wrong-box {
+      border-radius: 20px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+    }
+    .wrong-box h4 {
+      font-size: 16px;
+      font-weight: 900;
+      margin: 0 0 10px;
+    }
+    .wrong-box p {
+      color: #426271;
+      font-size: 14px;
+      line-height: 1.8;
+      font-weight: 700;
+    }
+    .variant-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .variant-card {
+      border-radius: 20px;
+      background: #fbffff;
+      border: 1px solid var(--border);
+      padding: 14px;
+    }
+    .variant-title {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.6;
+    }
+    .variant-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .variant-input {
+      min-width: 220px;
+      flex: 1;
+      min-height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      padding: 0 12px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+      outline: none;
+    }
+    .variant-result {
+      margin-top: 10px;
+      color: #426271;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+    .empty-state {
+      display: grid;
+      place-items: center;
+      min-height: 72vh;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--green-soft), var(--blue-soft), var(--pink-soft));
+      text-align: center;
+      padding: 24px;
+    }
+    .empty-state h2 {
+      margin-top: 16px;
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .empty-state p {
+      margin-top: 10px;
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 700;
+    }
+    .mobile-only { display: none; }
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.35);
+      padding: 12px;
+      z-index: 99;
+    }
+    .mobile-drawer {
+      width: min(92vw, 360px);
+      height: 100%;
+      transform: translateX(0);
+    }
+    @media (max-width: 1180px) {
+      .modules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 960px) {
+      .unlock-hero { grid-template-columns: 1fr; }
+      .unlock-grid { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .detail-layout { grid-template-columns: 1fr; }
+      .management-grid, .parent-report-grid { grid-template-columns: 1fr; }
+      .desktop-sidebar { display: none; }
+      .mobile-only { display: inline-flex; }
+      .current-topic { font-size: 20px; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .report-metrics, .report-grid { grid-template-columns: 1fr; }
+      .choice-grid { grid-template-columns: 1fr; }
+      .wrong-sections { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .app { padding: 10px; }
+      .topbar { border-radius: 22px; }
+      .panel, .module-card, .sidebar, .detail-toolbar, .content-wrap { border-radius: 22px; }
+      .modules { grid-template-columns: 1fr; }
+      .title { font-size: 22px; }
+      h1 { font-size: 32px; }
+      .primary-btn {
+        width: 100%;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="unlock-shell" id="unlock-shell">
+    <div class="unlock-card">
+      <div class="unlock-hero">
+        <div>
+          <div class="badge">AI超级学霸数学6年级 · 主页仪表盘</div>
+          <div class="unlock-title">输入授权码，解锁六年级数学同步学习空间。</div>
+          <div class="unlock-text">
+            这是你的教材同步学习系统入口。首次在当前设备或当前浏览器打开时，需要输入授权码完成解锁。
+            解锁成功后，系统会自动记住状态，下次打开无需重复输入。
+          </div>
+          <div class="unlock-grid">
+            <div class="unlock-metric">
+              <div class="small">访问方式</div>
+              <div class="big">授权码解锁</div>
+            </div>
+            <div class="unlock-metric">
+              <div class="small">状态记忆</div>
+              <div class="big">当前设备有效</div>
+            </div>
+            <div class="unlock-metric">
+              <div class="small">内容范围</div>
+              <div class="big">学习 + 做题 + 报告 + 错题库</div>
+            </div>
+          </div>
+        </div>
+        <div class="unlock-panel">
+          <div class="unlock-label">授权码</div>
+          <input id="unlock-code-input" class="unlock-input" placeholder="请输入授权码，例如：AS6-DEMO-STUDENT" />
+          <div class="unlock-help">支持学生学习码和家长查看码；测试学生码：AS6-DEMO-STUDENT，家长码：AS6-DEMO-PARENT。</div>
+          <div class="unlock-actions">
+            <button id="unlock-submit-btn" class="primary-btn" style="margin-top:0; min-height:56px; font-size:18px;">立即解锁</button>
+          </div>
+          <div id="unlock-status" class="unlock-status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app hidden" id="main-app">
+    <header class="topbar">
+      <div>
+        <div class="title">AI超级学霸数学6年级</div>
+        <div class="subtitle">教材同步版 · 纯原生前端稳定运行</div>
+      </div>
+      <div class="meta-row">
+        <div class="meta-pill green" id="total-progress-pill">已学 0 / 0</div>
+        <div class="meta-pill blue" id="view-pill">当前视图：主页仪表盘</div>
+        <div class="meta-pill blue" id="role-pill">当前身份：学生端</div>
+        <button class="ghost-btn" id="logout-btn">退出本机授权</button>
+      </div>
+    </header>
+
+    <section class="home" id="home-view"></section>
+    <section class="detail hidden" id="detail-view"></section>
+    <div class="mobile-overlay hidden" id="mobile-overlay"></div>
+  </div>
+
+  <script src="./knowledge-data.js"></script>
+  <script>
+    const STORAGE_KEY = 'ai-super-math-grade6-progress';
+    const VIEW_KEY = 'ai-super-math-grade6-view';
+    const ACTIVE_TOPIC_KEY = 'ai-super-math-grade6-active-topic';
+    const MODE_KEY = 'ai-super-math-grade6-mode';
+    const PRACTICE_ANSWERS_KEY = 'ai-super-math-grade6-practice-answers';
+    const REPORT_KEY = 'ai-super-math-grade6-report';
+    const WRONGBOOK_KEY = 'ai-super-math-grade6-wrongbook';
+    const VARIANT_ANSWERS_KEY = 'ai-super-math-grade6-variant-answers';
+    const UNLOCK_KEY = 'ai-super-math-grade6-unlocked';
+    const ACCESS_KEY = 'ai-super-math-grade6-access-profile';
+    const REVOKED_KEY = 'ai-super-math-grade6-revoked-hashes';
+    const MANAGEMENT_LOG_KEY = 'ai-super-math-grade6-management-log';
+    const ACTIVE_CODE_HASH_KEY = 'ai-super-math-grade6-active-code-hash';
+    const LESSON_SOUND_ENABLED_KEY = 'ai-super-math-grade6-lesson-sound-enabled';
+
+    const studentLicenseRegistry = [
+      { hash: "cd44509ae286145a0d06ba72c0461e33620a5291d75aad6c7d119e32a24e6638", tier: 'student', label: '六年级测试学生码', expiresAt: '2027-12-31T23:59:59+08:00' },
+      { hash: "4a6c184e04be0c7a69167207fb260697ca1b3f9bc25b9b6fccf0b1209bcfb880", tier: 'student', label: '六年级测试学生码简写', expiresAt: '2027-12-31T23:59:59+08:00' },
+      { hash: "2bd055f2828b125d300853d4aee86e48ee0e431487b737c0cc777f8b795cc0e1", tier: 'student' },
+      { hash: "392eaed7da9b51952da66b14e9a8113e29a4762bf39ea675dc36e79851d7233e", tier: 'student' },
+      { hash: "645efdc514fcf44ed47569b0b60149272783557afd2856bedc156e84128ba70a", tier: 'student' },
+      { hash: "281a77d70eeb2e68a116cd0ab21e20b29fd1288805bfb20dbfe5d256066ff1ca", tier: 'student' },
+      { hash: "04ab27e3eaa35fbb59633c7909dd8d8b12fd18f9c51e994437d739cd8852b7ff", tier: 'student' },
+      { hash: "bcde1c21480bec90585c7a6fbc6270f90e91130bbdce376a346518a2ddff6853", tier: 'student' },
+      { hash: "347ef5c22515a06a877de7b20d2fb6925688c67f4f4454d71297c4cdb07a138c", tier: 'student' },
+      { hash: "8c92913b07cd1391104ff09ace0a5de543577ec3ad0827177d2eefb6daa592d1", tier: 'student' },
+      { hash: "28ee2336b2721db8049d9ddf429ab3c72bc13f84134819797aba221db4464459", tier: 'student' },
+      { hash: "97e5feda9dcda920ae6c0dd5b5725f77bd3b49d0a8cf0c1f5b562f53d5cee166", tier: 'student' },
+      { hash: "1f757885c1a20cce17731ba5becb9225788acbabcf207b2a11cd5fbc64d1ebc6", tier: 'student' },
+      { hash: "7e6d24b966d0f86fd583a5c4e9977fd5801a0f7df20a8b71dc065a8899a2a3e7", tier: 'student' },
+      { hash: "b72b1d13afbcbb81c0b15dec342a52305edee86f7430ac992391ba84e6768590", tier: 'student' },
+      { hash: "3de6033eac4e8eafeb153ee3b69dc5d03eb96578245851381690c2e33039372d", tier: 'student' },
+      { hash: "3292d7f1efa04c161d41fa820cf1b2c7c5558e3159b8a0a9616030b618ce3355", tier: 'student' },
+      { hash: "a15b758547f982300d6794fae2bb7b5594414e581e8426823412668d114ce6b5", tier: 'student' },
+      { hash: "ad2b9ccad35ad46daab3511e90d520fb1f35cbf93a89ff07b6052a8ec76f1b06", tier: 'student' },
+      { hash: "1a614c2500e79a86519373950e3b555e12141d4f7eb7cfc6041129180f2c9bdd", tier: 'student' },
+      { hash: "10eb9759e5bcddc85b9dafbff06c7974e16ca3ff586d91a0dc002eccb8c40bd6", tier: 'student' },
+      { hash: "57f89602f1eb5c1415988cbf080fcfaced13a3c5b89bcb0ea7f25e3872c05824", tier: 'student' },
+      { hash: "44df00a88a102d03e71b7b3b88e8b063e08261cb6a9c2d9d3aa966e49c59be00", tier: 'student' },
+      { hash: "5ca1acf0862c79b2f8e9fbc19a2122e16e6515441869d447cdfcf5f5e2791f0a", tier: 'student' },
+      { hash: "af5fc4c3e0fbb01df735179cfd86d34f5f2989183b5ea12f6c70186135227da5", tier: 'student' },
+      { hash: "9fa6f0d6ecb7e4800281d63efff4c84b9d3b294153a14fa507dc5230460f8caa", tier: 'student' },
+      { hash: "c67b0de72c3b1af3e89d1f01a7bad18aedf8aeee400d5fd2b1eed0fad656772a", tier: 'student' },
+      { hash: "475331cf058f938ec274eb3b514dc9e4ad4dde92db13708d2e6ba1c4f7203b9e", tier: 'student' },
+      { hash: "595aed6ff5f497ff8a5551536de65e6b1524614e9851617a92dd4b1cc240fe15", tier: 'student' },
+      { hash: "88ce97989bc8013b6acea3b3874a071ee057df1012b0375613438579a56e4922", tier: 'student' },
+      { hash: "6baeed492ade0137bc9f4985c48853f57af010964c701d62d870bdd6da8461e3", tier: 'student' },
+      { hash: "bcf6dcc5f6e28ba11bbd3dffecde6c3b9ce113a48a0e8bde1582331a19a468d8", tier: 'student' },
+      { hash: "88d591cb6cc696db5ae428ddbef03ed59926b2facbc3c4cba474f3ced73c12b5", tier: 'student' },
+      { hash: "2d5001c1acb6aa2ae68bab7544c8afeb304523800485e00218e19b4ccbe1733d", tier: 'student' },
+      { hash: "45c0fa9da4af122973d53568a2a3071e629576345f834f95fc4caa355bf9099e", tier: 'student' },
+      { hash: "8e83f37ccb896d2c87470442dde8bb9d8fbd0c9871c94e48b5a6dbc318dba4b8", tier: 'student' },
+      { hash: "3a4f05ed51d0dbdb6a4ea102fe6d9570cca21a2009f760c2d5f39e4ff928175b", tier: 'student' },
+      { hash: "f2a4c21b8183c16cf514ca3b8df2ae79ee58b3220a0aa3e6426cb14d1e4e72da", tier: 'student' },
+      { hash: "b3977dfb32cce49bde2ea8cc5149ba987dfd5abaa72f1afde88cbe42f64a822f", tier: 'student' },
+      { hash: "b62ea8d5a962f96df2fcdd5a820d965ee1c6de490133cb250ea509f2df5aa8a1", tier: 'student' },
+      { hash: "3af45250a3b3f42db2c0b6cae32ff82297f5f5b3285d44df4ebdaed904ad02a2", tier: 'student' },
+      { hash: "89d513c9cad71a0b915ee917a49dc5e174546f60f8ae30247537d02df4e35ba1", tier: 'student' },
+      { hash: "a98c4f4f73a066df897fa1a79549a6784c853cc9bf4aacc3929913828b3ab7bb", tier: 'student' },
+      { hash: "9bf65218221dbf45f7db671f8b2cee07133a1f1758786799a0456b3d7f588c0f", tier: 'student' },
+      { hash: "ca203ae8820027f40ddf2bafc2ee23c701688ea2836336d29b7e7922b927a0a2", tier: 'student' },
+      { hash: "6a746d7ec28b432cb57f6c8bd1be36ac04f8cb8e36a08a4c7549f227ea6acb6c", tier: 'student' },
+      { hash: "511e5293fcb5c7620c1088e6d7532bc404de0608002a3ea749a3beedbcfe0f71", tier: 'student' },
+      { hash: "ee0ab6b3f3c6fb29d767ced3e4b6f2e8ea985d45987e3c1ec34acd18a50b389d", tier: 'student' },
+      { hash: "9e340c239c0c501178f626fe9912744a772cd4d42cd90b5ee7534e1fc6de2b64", tier: 'student' },
+      { hash: "9640d438a5d25474f5d91770382577e7688f9c40e62777f271245d3a7518c3f5", tier: 'student' },
+      { hash: "5310670a64fc25459c6300dc691c5d47a403035c8ff12bc922d3367516d7479b", tier: 'student' },
+      { hash: "e3f75cc9d78da24c519283e9719e0a9c20adbcb64be887cc4bab6bfd2831f547", tier: 'student' },
+      { hash: "03600d2ac4df2a618a60806aaea7b4308f6b0da59ee841097ec9bcbe2483ac9a", tier: 'student', label: '7天学生码 S01', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "834a90478c87df71cd7cdca810cf3b610cf50b76c347a6a3a434bcd6b9783599", tier: 'student', label: '7天学生码 S02', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "4ee87509d0899875b264cc29350f37c4eec0b1e44ce71cb105518f2962016292", tier: 'student', label: '7天学生码 S03', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "7cc80c17fe021e847493b4aff66f2ea5ffd86dc09f135ae8bea41c88af466ab3", tier: 'student', label: '7天学生码 S04', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "446bae57d72b1a4b0b262471af4918ae3d1939a3fce99a3a242988c95f278e83", tier: 'student', label: '7天学生码 S05', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "affbb4b764187a812b0d1fa67dbb97463d4ee58f735799af127ddc81d295b0a6", tier: 'student', label: '7天学生码 S06', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "c1035e37f576b88e90a3b18d974dfc0b81d89a24079f8e27fe98e352f816c7b2", tier: 'student', label: '7天学生码 S07', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "2618d7a0477dc01237ef9d447826a01fea8d6d98dfab9d90c307042f726e990a", tier: 'student', label: '7天学生码 S08', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "1dd384eab6fdf905ea4296f022bf970bc12accadbb2185774f9b7c55ea83903e", tier: 'student', label: '7天学生码 S09', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "0a280611e9a1f4c36d68cbde4818fce90647af9022ac54b54d42515c93a6b83e", tier: 'student', label: '7天学生码 S10', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "a1bb713a91575fff90b36d3d9a32386752bb8547d41b7e3af768e2a31fdc44c4", tier: 'student', label: '7天学生码 S11', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "3eef4924062201376c7c92f68e4292646530a9e43b46112bb316195ec7172e06", tier: 'student', label: '7天学生码 S12', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "454ac2008a05f36f17a12db2e7c58e96c3d09071a1448a9a9128232030cd1685", tier: 'student', label: '7天学生码 S13', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "dcc642b98dcfcfa13f0ec749847376b8ba031031ebae82b86492ef395e397bce", tier: 'student', label: '7天学生码 S14', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "21acea4a1b7401dfa9da600f23b7611ab312624dd0f5e09db6ff484d0fd60518", tier: 'student', label: '7天学生码 S15', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "05f7a511cc02783293d45b480e345a8eff575be02f5c1e72949116f03065130d", tier: 'student', label: '7天学生码 S16', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "7aae8e02b2ada75b11f27a5f8265253e18f67d4cb32853b2c654685b92deb594", tier: 'student', label: '7天学生码 S17', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "10fe2ec98e79d8c04a0983b73f85924b9dd3189440f028fe9cfcade076b8b868", tier: 'student', label: '7天学生码 S18', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "50d58eac91b33605580dbf8ad0f6568f6c09c79954daeebd72910ee25c6aa705", tier: 'student', label: '7天学生码 S19', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "f2961dbf84257f58d2a6d495c110ea89f6c8cce84ae59273d95bb9350a39d21c", tier: 'student', label: '7天学生码 S20', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "10087decf6a838eb73d309695a6fdc240e75401068d921a504a9a6677205ab30", tier: 'student', label: '7天学生码 S21', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "9211b2b14886f956bed31e51fde4cde8ebd986151f0619619286770949f1c3dc", tier: 'student', label: '7天学生码 S22', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "2214348d729744c2531a3e9aff91b13cc77de45e4df18cb33217fed784f1fd06", tier: 'student', label: '7天学生码 S23', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "fd30098239d0dee59e46011ee964564d3556e511e289bbda11c8892f17044ffa", tier: 'student', label: '7天学生码 S24', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "cd3d085b5cf84aaf8972835400772ecfd4c2b2d1c914d81d4f2121c7fd6e3680", tier: 'student', label: '7天学生码 S25', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "9516cf6cae089919c785869b6a0a7c6ca1fed739bca4042cbe25f49eeb5da2e8", tier: 'student', label: '7天学生码 S26', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "86c9afd8222dad9a0d0a17ac9d96b5f97fae2c5d5d4b661c2e78a86d743e0d75", tier: 'student', label: '7天学生码 S27', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "6ba6494e3bb417b7e0df5b65e3565806116c440bb975d1453333af09a0617f61", tier: 'student', label: '7天学生码 S28', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "8ae66a9c4cac92ea588aa8baf72edb5d000c6586b603178daceb9e639925036f", tier: 'student', label: '7天学生码 S29', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "39bf14a65ba6625d33c0637e5b7fdbf7e3c07e0ff3e6db47991df4639ac2b696", tier: 'student', label: '7天学生码 S30', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "b064e776a88f56de69ff0149ec4b79ebae43b202c19ed8d069eebc7248db3daf", tier: 'student', label: '7天学生码 S31', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "27293edbf87817ff95ab2f06de2004c4ddeb76cfc471e9ad35ac5a35957456ba", tier: 'student', label: '7天学生码 S32', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "246714cebfe65c139a1e7536deea3245c1623d690ecda6532b406f57e9c6a285", tier: 'student', label: '7天学生码 S33', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "71900ab1461887786af8e24a0345ce326b928678a34f50bd1bf8d4d3a617ccf5", tier: 'student', label: '7天学生码 S34', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "04dca9b22ad747ea66579197e0bea595fe126ec5c0432e2becf9e8eb14328e3d", tier: 'student', label: '7天学生码 S35', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "8a8c669f6eff60a1c8b91186a3851fffb9e9d465915600148dd72e71441b4abe", tier: 'student', label: '7天学生码 S36', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "dcaf56dcc09eb70553f2e0b8ba32d2de09244e6ce7f3623b047b5ab33fd6b486", tier: 'student', label: '7天学生码 S37', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "a306cb11b2862dddac999b58cac477b58bcafe367fe0cbbdbe0c7215e3317918", tier: 'student', label: '7天学生码 S38', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "a09f95039a5d50ddd0545ab6541b50428f9c078b7b2c70539e48abe1403cc148", tier: 'student', label: '7天学生码 S39', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "f9220d8ea92f72c705edce75c8ccf8637e5b91a6fe62991eaa76c6a2a0f9589e", tier: 'student', label: '7天学生码 S40', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "a84d43b86a9e8da8a54d85f1680ca646f9d15df73bc70b8512c82cab8268a568", tier: 'student', label: '7天学生码 S41', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "df78af76493cfb4523bdadef8eb7203665b52265151ccdb1941057337d875dda", tier: 'student', label: '7天学生码 S42', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "a74310db213410316ff92171a87ac47e33586a0e837250ed218ca68ccd940402", tier: 'student', label: '7天学生码 S43', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "65fea070743540f72bb916693d721a20211ddcafde186457c5456992574eb8ba", tier: 'student', label: '7天学生码 S44', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "5c3031bb66e787c755799eec6ac09379dadaafcbab89ab488bcbb0762d1b6618", tier: 'student', label: '7天学生码 S45', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "9e2e088c3f3ea43c1103fb620b72c04f996c9bb7f404ed545c90f4a1aef6c84e", tier: 'student', label: '7天学生码 S46', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "7ec25f60eab58955979e4f86f405c6bdd388a3159e37e79bd1fad3f3add7f6fd", tier: 'student', label: '7天学生码 S47', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "cded9da7968df41174faf7cedf298288681370f6a763035fbecbf2f515777742", tier: 'student', label: '7天学生码 S48', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "0949da2cd3171e300a3ad41ee672d29d80dd5acdeab139313e9870f2fe79019a", tier: 'student', label: '7天学生码 S49', expiresAt: '2026-05-28T00:00:00+08:00' },
+      { hash: "aff2d5a5c6376e7bd0d0347d2880bd9e730699ce4f3f66159333cf183bc5b1d9", tier: 'student', label: '7天学生码 S50', expiresAt: '2026-05-28T00:00:00+08:00' }
+    ];
+
+    const parentLicenseRegistry = [
+      { hash: "c90a22634d65c497f08a180557a91d1d0c597fa3b5c4fac47ccf025d0d01dea2", tier: 'parent', label: '六年级测试家长码', expiresAt: '2027-12-31T23:59:59+08:00' },
+      { hash: "69ced9402e02a636f8da4dc18c91ec2448dd34c129b101a50756f7e5fffaa50c", tier: 'parent', label: '家长查看码 A01' },
+      { hash: "cc1ab157d66b5d1c0c4bb7e9054ee8c1698b5a7a96dc7d1b2b0e6a8b5db3b3f5", tier: 'parent', label: '家长查看码 A02' },
+      { hash: "e3628b86b9c0559396471321f6e92665e40b9996b64c4c650d90eefe75b7f70c", tier: 'parent', label: '家长查看码 A03' },
+      { hash: "ef5837185138fea9424e94fa7a3637a456f7c5df25053e21b42114ee60769850", tier: 'parent', label: '家长查看码 A04' },
+      { hash: "77ed45dbf3ae55d49e16faad11b45f852e0834c0bc6a3ad52b613ed6fd69a932", tier: 'parent', label: '家长查看码 A05' },
+      { hash: "e0e5e2ce39f3cc26b7d0ab18bc586bb0a6a2b0b0ffee323ecd030acfa4e626f7", tier: 'parent', label: '家长查看码 A06' },
+      { hash: "f92f9c9802aea973c33e66682153692f5c71dd615fb67768794a1d819e6155ad", tier: 'parent', label: '家长查看码 A07' },
+      { hash: "da272a4854327804d87c2b3222dbf1955c0400cec020cee1c92f44c2d26dd0b3", tier: 'parent', label: '家长查看码 A08' },
+      { hash: "c74be4679c7c5c6a5a721d60da45543f4616a4597948c85533305d7f6b6fc399", tier: 'parent', label: '家长查看码 A09' },
+      { hash: "fb8e8fda6d0a63d6ce61aabfb67eca48a33e7356c5d43cba5c7b12be3a03e119", tier: 'parent', label: '家长查看码 A10' },
+      { hash: "acac292b401af24e1f270a2460051bd25861543736d39a39e69a2bab92e55ab9", tier: 'parent', label: '家长查看码 A11' },
+      { hash: "1b608e1ea9e8676127f541705bee2bbe0636830898bf373d691081f3695c1c58", tier: 'parent', label: '家长查看码 A12' }
+    ];
+
+    const licenseRegistry = new Map([
+      ...studentLicenseRegistry.map(item => [item.hash, item]),
+      ...parentLicenseRegistry.map(item => [item.hash, item])
+    ]);
+
+    const categoryDescriptions = {
+      '数与代数': '本册数与代数主线：分数乘法、分数除法、比和百分数。',
+      '图形与几何': '本册几何主线：位置与方向（二）、圆、扇形和组合图形。',
+      '统计与概率': '本册统计主线：扇形统计图、统计图选择和数据解释。',
+      '综合与实践': '数学广角“数与形”、综合实践与全册复习在这里集中查看。'
+    };
+
+    const textbookOutline = [
+      { chapter: '第1单元 分数乘法', category: '数与代数', items: ['1.1 分数乘整数','1.1 分数乘整数的意义','1.1 分数乘整数的计算','1.2 一个数乘分数','1.2 求一个数的几分之几是多少','1.2 分数乘分数','1.3 分数乘法混合运算','1.3 分数乘法简便计算','1.4 解决问题','1.4 连续求一个数的几分之几','1.4 已知部分求整体的前置模型','第1单元整理和复习'] },
+      { chapter: '第2单元 位置与方向（二）', category: '图形与几何', items: ['2.1 用方向和距离确定位置','2.1 方位角','2.1 根据描述标出位置','2.2 描述简单路线图','2.2 根据路线图说方向和距离','第2单元整理和复习'] },
+      { chapter: '第3单元 分数除法', category: '数与代数', items: ['3.1 倒数的认识','3.2 分数除以整数','3.2 一个数除以分数','3.2 分数除法的计算','3.3 分数四则混合运算','3.4 已知一个数的几分之几是多少求这个数','3.4 量率对应','3.4 工程问题','3.4 方程解决分数除法问题','第3单元整理和复习'] },
+      { chapter: '第4单元 比', category: '数与代数', items: ['4.1 比的意义','4.1 比与除法、分数的关系','4.2 比的基本性质','4.2 化简比','4.2 求比值','4.3 按比例分配','4.3 比的实际应用','第4单元整理和复习'] },
+      { chapter: '第5单元 圆', category: '图形与几何', items: ['5.1 圆的认识','5.1 圆心、半径和直径','5.1 用圆规画圆','5.1 圆的对称性','5.2 圆的周长','5.2 圆周率','5.3 圆的面积','5.3 圆环面积','5.3 组合图形中的圆','5.4 扇形','第5单元整理和复习'] },
+      { chapter: '第6单元 百分数（一）', category: '数与代数', items: ['6.1 百分数的意义和读写','6.1 百分数与分数、小数互化','6.2 求百分率','6.2 求一个数是另一个数的百分之几','6.2 求一个数比另一个数多（少）百分之几','6.3 百分数解决问题','第6单元整理和复习'] },
+      { chapter: '第7单元 扇形统计图', category: '统计与概率', items: ['7.1 扇形统计图的认识','7.1 从扇形统计图获取信息','7.2 选择合适的统计图','7.2 统计图综合分析','第7单元整理和复习'] },
+      { chapter: '第8单元 数学广角——数与形', category: '综合与实践', items: ['8.1 数与形','8.1 从图形看数列规律','8.1 用图形解释计算','8.1 数形结合解决问题','第8单元整理和复习'] },
+      { chapter: '总复习与综合实践', category: '综合与实践', items: ['分数乘除法总复习','比和百分数总复习','圆与位置方向总复习','统计图总复习','六年级上册综合测评','学习反思与错题整理'] }
+    ];
+    const variantBank = {
+      '分数乘法': [
+        { id: 'v-fm1', prompt: '计算：3/5 × 10 = ______。', type: 'fill', answerText: ['6'], explanation: '分数乘整数，可以先约分再计算。' },
+        { id: 'v-fm2', prompt: '24 的 3/8 是多少？', type: 'choice', options: ['A. 6', 'B. 9', 'C. 12', 'D. 18'], answer: 'B', explanation: '求一个数的几分之几，用乘法。' },
+        { id: 'v-fm3', prompt: '一本书 90 页，已经看了 2/5，看了______页。', type: 'fill', answerText: ['36'], explanation: '90×2/5=36，先把 90 看作单位1。' }
+      ],
+      '分数除法': [
+        { id: 'v-fd1', prompt: '计算：18 ÷ 3/5 = ______。', type: 'fill', answerText: ['30'], explanation: '除以一个不为 0 的数，等于乘这个数的倒数。' },
+        { id: 'v-fd2', prompt: '一个数的 2/3 是 20，这个数是多少？', type: 'fill', answerText: ['30'], explanation: '已知对应量和对应分率，用除法求单位1。' },
+        { id: 'v-fd3', prompt: '一条路修了 3/7，正好修了 21 千米，这条路全长______千米。', type: 'fill', answerText: ['49'], explanation: '21÷3/7=49，已知部分量求单位1用除法。' }
+      ],
+      '比': [
+        { id: 'v-r1', prompt: '把 18:24 化成最简单整数比。', type: 'fill', answerText: ['3:4', '3∶4'], explanation: '比的前项和后项同时除以最大公因数 6。' },
+        { id: 'v-r2', prompt: '男、女生人数比是 5:4，全班 45 人，男生多少人？', type: 'fill', answerText: ['25'], explanation: '总份数是 9 份，45÷9×5=25。' },
+        { id: 'v-r3', prompt: '把 0.6:1.2 化成最简单整数比。', type: 'fill', answerText: ['1:2', '1∶2'], explanation: '先同时扩大 10 倍成 6:12，再化简为 1:2。' }
+      ],
+      '位置方向': [
+        { id: 'v-pos1', prompt: '小明家在学校东偏北 30° 方向 400 米处，学校在小明家______方向 400 米处。', type: 'fill', answerText: ['西偏南30°', '西偏南30度', '西偏南 30°'], explanation: '观测点反过来，方向也要反过来，距离不变。' },
+        { id: 'v-pos2', prompt: '确定一个位置通常需要哪两个条件？', type: 'choice', options: ['A. 颜色和形状', 'B. 方向和距离', 'C. 时间和天气', 'D. 单价和数量'], answer: 'B', explanation: '位置与方向题要同时给出方向和距离。' },
+        { id: 'v-pos3', prompt: '图书馆在操场南偏西 45° 方向 200 米处，返回时应向______方向走 200 米。', type: 'fill', answerText: ['北偏东45°', '北偏东45度', '北偏东 45°'], explanation: '返回路线方向相反，距离相同。' }
+      ],
+      '圆': [
+        { id: 'v-c1', prompt: '半径 5 cm 的圆，直径是多少？', type: 'fill', answerText: ['10cm', '10', '10厘米'], explanation: '直径是半径的 2 倍。' },
+        { id: 'v-c2', prompt: '圆的面积公式是哪一个？', type: 'choice', options: ['A. C=2πr', 'B. S=πr²', 'C. S=ab', 'D. S=ah'], answer: 'B', explanation: '圆面积等于 π 乘半径的平方。' },
+        { id: 'v-c3', prompt: '半径 3 m 的圆，周长是______m。（π取3.14）', type: 'fill', answerText: ['18.84'], explanation: 'C=2πr=2×3.14×3=18.84。' }
+      ],
+      '扇形': [
+        { id: 'v-sector1', prompt: '扇形由一条弧和经过这条弧两端的两条______围成。', type: 'fill', answerText: ['半径'], explanation: '扇形的两条直边必须是半径。' },
+        { id: 'v-sector2', prompt: '下面哪个图形最可能是扇形？', type: 'choice', options: ['A. 圆的一部分，含圆心角', 'B. 长方形的一半', 'C. 三角形', 'D. 平行四边形'], answer: 'A', explanation: '扇形是圆的一部分，和圆心角有关。' },
+        { id: 'v-sector3', prompt: '同一个圆中，圆心角越大，扇形面积越______。', type: 'fill', answerText: ['大', '越大'], explanation: '半径相同，圆心角越大，对应扇形越大。' }
+      ],
+      '百分数': [
+        { id: 'v-pct1', prompt: '0.375 写成百分数是______。', type: 'fill', answerText: ['37.5%', '37.5％'], explanation: '小数化百分数，小数点向右移动两位并添百分号。' },
+        { id: 'v-pct2', prompt: '120 人中有 30 人参加社团，参加率是多少？', type: 'fill', answerText: ['25%', '25％'], explanation: '30÷120=0.25=25%。' },
+        { id: 'v-pct3', prompt: '一件衣服原价 200 元，降价 15%，便宜______元。', type: 'fill', answerText: ['30'], explanation: '200×15%=30，降价百分数是原价的百分之几。' }
+      ],
+      '统计图': [
+        { id: 'v-s1', prompt: '扇形统计图最适合表示什么？', type: 'choice', options: ['A. 部分与整体的关系', 'B. 每天温度变化', 'C. 两个数量相加', 'D. 物体长度'], answer: 'A', explanation: '扇形统计图突出各部分占总体的百分比。' },
+        { id: 'v-s2', prompt: '全校 800 人，六年级占 20%，六年级有______人。', type: 'fill', answerText: ['160'], explanation: '800×20%=160。' },
+        { id: 'v-s3', prompt: '要表示一周气温变化趋势，最适合用______统计图。', type: 'fill', answerText: ['折线', '折线统计图'], explanation: '折线统计图适合表示数量随时间变化的趋势。' }
+      ],
+      '数与形': [
+        { id: 'v-nf1', prompt: '第1幅1个点，第2幅4个点，第3幅9个点，第6幅多少个点？', type: 'fill', answerText: ['36'], explanation: '图形点数对应平方数：1²、2²、3²……' },
+        { id: 'v-nf2', prompt: '1、3、5、7、9 这 5 个连续奇数的和是______。', type: 'fill', answerText: ['25'], explanation: '前 5 个连续奇数和是 5²=25。' },
+        { id: 'v-nf3', prompt: '第 n 幅正方形点阵有 n² 个点，第7幅有______个点。', type: 'fill', answerText: ['49'], explanation: '7²=49。' }
+      ],
+      '综合实践': [
+        { id: 'v-z1', prompt: '整理错题时，除了写答案，还要记录什么？', type: 'solve', keywords: ['错因', '方法', '反思', '同类题'], explanation: '错题整理要看错因、方法和迁移。' },
+        { id: 'v-z2', prompt: '做综合实践题时，最后为什么要检查结果是否合理？', type: 'solve', keywords: ['合理', '条件', '单位', '实际'], explanation: '综合实践题来自真实情境，结果要能回到实际问题中解释。' },
+        { id: 'v-z3', prompt: '设计一次班级用水调查，至少要记录哪三类信息？', type: 'solve', keywords: ['对象', '时间', '数据', '结论'], explanation: '实践活动要有调查对象、时间范围、数据记录和结论。' }
+      ]
+    };
+
+    const practicePapers = {
+      '数与代数': {
+        title: '数与代数同步小测', subtitle: '围绕分数乘除法、比和百分数，检查单位1、量率对应和计算表达。',
+        questions: [
+          { id: 'na-1', type: 'choice', score: 10, category: '选择题', skill: '分数乘法', prompt: '求 36 的 5/6 是多少，列式正确的是哪一项？', options: ['A. 36+5/6', 'B. 36×5/6', 'C. 36÷5/6', 'D. 36-5/6'], answer: 'B' },
+          { id: 'na-2', type: 'choice', score: 10, category: '选择题', skill: '分数除法', prompt: '一个数的 3/4 是 24，求这个数应列式为？', options: ['A. 24×3/4', 'B. 24÷3/4', 'C. 3/4÷24', 'D. 24+3/4'], answer: 'B' },
+          { id: 'na-3', type: 'choice', score: 10, category: '选择题', skill: '比', prompt: '12:18 化成最简单整数比是？', options: ['A. 2:3', 'B. 3:2', 'C. 6:9', 'D. 12:18'], answer: 'A' },
+          { id: 'na-4', type: 'choice', score: 10, category: '选择题', skill: '百分数', prompt: '0.45 化成百分数是？', options: ['A. 4.5%', 'B. 45%', 'C. 450%', 'D. 0.45%'], answer: 'B' },
+          { id: 'na-5', type: 'fill', score: 10, category: '填空题', skill: '分数乘法', prompt: '24 的 3/8 是______。', answerText: ['9'] },
+          { id: 'na-6', type: 'fill', score: 10, category: '填空题', skill: '比', prompt: '男生和女生人数比是 5:4，全班 45 人，男生______人。', answerText: ['25'] },
+          { id: 'na-7', type: 'solve', score: 20, category: '解答题', skill: '分数除法', prompt: '一袋米吃了 2/5 后还剩 18 千克，原来有多少千克？写出单位1和解法。', keywords: ['单位1', '3/5', '18', '30'], sample: '还剩 1-2/5=3/5，18÷3/5=30 千克。' },
+          { id: 'na-8', type: 'solve', score: 20, category: '解答题', skill: '百分数', prompt: '六年级 120 人，参加社团的有 42 人。参加率是多少？写出计算过程。', keywords: ['42', '120', '35%'], sample: '42÷120=0.35=35%。' }
+        ]
+      },
+      '图形与几何': {
+        title: '图形与几何同步小测', subtitle: '围绕位置方向、圆的周长面积和组合图形，检查画图、公式和单位。',
+        questions: [
+          { id: 'geo-1', type: 'choice', score: 10, category: '选择题', skill: '位置方向', prompt: '确定物体位置通常需要哪两个条件？', options: ['A. 颜色和大小', 'B. 方向和距离', 'C. 时间和速度', 'D. 单价和数量'], answer: 'B' },
+          { id: 'geo-2', type: 'choice', score: 10, category: '选择题', skill: '圆', prompt: '同一个圆中，直径和半径的关系是？', options: ['A. d=r', 'B. d=2r', 'C. r=2d', 'D. d=r²'], answer: 'B' },
+          { id: 'geo-3', type: 'choice', score: 10, category: '选择题', skill: '圆', prompt: '半径是 3 cm 的圆，面积公式列式正确的是？', options: ['A. 2π×3', 'B. π×3²', 'C. π×6²', 'D. 3×3'], answer: 'B' },
+          { id: 'geo-4', type: 'choice', score: 10, category: '选择题', skill: '扇形', prompt: '扇形由什么围成？', options: ['A. 一条弧和经过这条弧两端的两条半径', 'B. 两条直线', 'C. 三条边', 'D. 一个长方形'], answer: 'A' },
+          { id: 'geo-5', type: 'fill', score: 10, category: '填空题', skill: '圆', prompt: '半径 5 cm 的圆，直径是______cm。', answerText: ['10'] },
+          { id: 'geo-6', type: 'fill', score: 10, category: '填空题', skill: '圆', prompt: '圆周长公式可以写作 C=______。', answerText: ['2πr', 'πd'] },
+          { id: 'geo-7', type: 'solve', score: 20, category: '解答题', skill: '位置方向', prompt: '学校在书店北偏东 40° 方向 600 米处。请描述书店在学校的什么方向、多少米处。', keywords: ['南偏西', '40', '600'], sample: '书店在学校南偏西 40° 方向 600 米处。' },
+          { id: 'geo-8', type: 'solve', score: 20, category: '解答题', skill: '圆', prompt: '一个圆形花坛半径 4 m，面积约是多少平方米？π 取 3.14。', keywords: ['3.14', '4', '50.24'], sample: 'S=πr²=3.14×4²=50.24 平方米。' }
+        ]
+      },
+      '统计与概率': {
+        title: '统计与概率同步小测', subtitle: '围绕扇形统计图和统计图选择，检查读图、比较和表达结论。',
+        questions: [
+          { id: 'st-1', type: 'choice', score: 15, category: '选择题', skill: '统计图', prompt: '要表示各部分占总体的百分比，最适合用哪种统计图？', options: ['A. 条形统计图', 'B. 折线统计图', 'C. 扇形统计图', 'D. 统计表'], answer: 'C' },
+          { id: 'st-2', type: 'choice', score: 15, category: '选择题', skill: '统计图', prompt: '要表示一周气温变化趋势，最适合用哪种统计图？', options: ['A. 折线统计图', 'B. 扇形统计图', 'C. 圆形', 'D. 只写文字'], answer: 'A' },
+          { id: 'st-3', type: 'fill', score: 30, category: '填空题', skill: '统计图', prompt: '某项目占总体的 30%，总体是 200，对应数量是______。', answerText: ['60'] },
+          { id: 'st-4', type: 'solve', score: 40, category: '解答题', skill: '统计图', prompt: '阅读扇形统计图时，至少要先看哪三类信息？', keywords: ['标题', '项目', '百分比', '总量'], sample: '先看标题、各项目名称、百分比和总量，再作判断。' }
+        ]
+      },
+      '综合与实践': {
+        title: '综合与实践同步小测', subtitle: '围绕数与形、总复习和错题整理，检查规律发现和数学表达。',
+        questions: [
+          { id: 'pr-1', type: 'choice', score: 20, category: '选择题', skill: '数与形', prompt: '1、4、9、16 这一列数最可能对应哪类图形规律？', options: ['A. 三角形数', 'B. 平方数', 'C. 偶数', 'D. 质数'], answer: 'B' },
+          { id: 'pr-2', type: 'fill', score: 30, category: '填空题', skill: '数与形', prompt: '第1幅1个点，第2幅4个点，第3幅9个点，第5幅______个点。', answerText: ['25'] },
+          { id: 'pr-3', type: 'solve', score: 50, category: '解答题', skill: '综合实践', prompt: '请写出一次整理错题的步骤，至少包含错因和同类练习。', keywords: ['错因', '订正', '同类', '复盘'], sample: '先写错因，再订正，再找同类题练习，最后复盘方法。' }
+        ]
+      }
+    };
+    function parseKnowledgeCsv(csvText) {
+      return csvText.trim().split(/\r?\n/).slice(1).map((line, index) => {
+        const [category, subcategory, topic, grade] = line.split(',');
+        return {
+          id: `${category}__${subcategory}__${topic}__${index}`,
+          category,
+          subcategory,
+          topic,
+          grade,
+          file: `k-${String(index + 1).padStart(3, '0')}.html`
+        };
+      });
+    }
+
+    const knowledgeItems = parseKnowledgeCsv(window.KNOWLEDGE_CSV || '');
+    const state = {
+      view: safeLoad(VIEW_KEY, 'home'),
+      completed: new Set(safeLoad(STORAGE_KEY, [])),
+      activeTopicId: safeLoad(ACTIVE_TOPIC_KEY, knowledgeItems[0]?.id || null),
+      mode: safeLoad(MODE_KEY, 'lesson'),
+      search: '',
+      mobileSidebarOpen: false,
+      expandedCategories: {},
+      expandedSubcategories: {},
+      practiceAnswers: safeLoad(PRACTICE_ANSWERS_KEY, {}),
+      latestReport: safeLoad(REPORT_KEY, null),
+      wrongbook: safeLoad(WRONGBOOK_KEY, []),
+      variantAnswers: safeLoad(VARIANT_ANSWERS_KEY, {}),
+      accessProfile: safeLoad(ACCESS_KEY, null),
+      revokedHashes: new Set(safeLoad(REVOKED_KEY, [])),
+      managementLog: safeLoad(MANAGEMENT_LOG_KEY, []),
+      managementBulkInput: '',
+      managementStatus: '',
+      lessonSoundEnabled: safeLoad(LESSON_SOUND_ENABLED_KEY, true),
+      revealActiveTopic: true
+    };
+
+    const homeView = document.getElementById('home-view');
+    const detailView = document.getElementById('detail-view');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    const totalProgressPill = document.getElementById('total-progress-pill');
+    const viewPill = document.getElementById('view-pill');
+    const rolePill = document.getElementById('role-pill');
+    const unlockShell = document.getElementById('unlock-shell');
+    const mainApp = document.getElementById('main-app');
+    const unlockInput = document.getElementById('unlock-code-input');
+    const unlockStatus = document.getElementById('unlock-status');
+    const unlockSubmitBtn = document.getElementById('unlock-submit-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const AUDIO_VERSION = 'voice-neural-20260515';
+    let searchRenderTimer = null;
+
+    if (safeLoad(UNLOCK_KEY, false) && isStoredAccessValid()) {
+      unlockShell.classList.add('hidden');
+      mainApp.classList.remove('hidden');
+      initializeExpansion();
+      render();
+    } else {
+      unlockShell.classList.remove('hidden');
+      mainApp.classList.add('hidden');
+    }
+
+    unlockSubmitBtn.addEventListener('click', attemptUnlock);
+    unlockInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') attemptUnlock();
+    });
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem(UNLOCK_KEY);
+      localStorage.removeItem(ACCESS_KEY);
+      localStorage.removeItem(ACTIVE_CODE_HASH_KEY);
+      state.accessProfile = null;
+      unlockStatus.textContent = '已退出当前设备授权，请重新输入卡密。';
+      unlockStatus.className = 'unlock-status ok';
+      mainApp.classList.add('hidden');
+      unlockShell.classList.remove('hidden');
+      unlockInput.value = '';
+    });
+
+    function isStoredAccessValid() {
+      if (!state.accessProfile?.hash) return false;
+      const license = licenseRegistry.get(state.accessProfile.hash);
+      if (!license || state.revokedHashes.has(state.accessProfile.hash) || isLicenseExpired(license)) {
+        localStorage.removeItem(UNLOCK_KEY);
+        localStorage.removeItem(ACCESS_KEY);
+        localStorage.removeItem(ACTIVE_CODE_HASH_KEY);
+        state.accessProfile = null;
+        return false;
+      }
+      if (state.accessProfile.expiresAt !== (license.expiresAt || null)) {
+        state.accessProfile = {
+          ...state.accessProfile,
+          tier: license.tier,
+          label: license.label || state.accessProfile.label,
+          expiresAt: license.expiresAt || null
+        };
+        localStorage.setItem(ACCESS_KEY, JSON.stringify(state.accessProfile));
+      }
+      return true;
+    }
+
+    function safeLoad(key, fallback) {
+      try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : fallback;
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(state.completed)));
+      localStorage.setItem(VIEW_KEY, JSON.stringify(state.view));
+      localStorage.setItem(ACTIVE_TOPIC_KEY, JSON.stringify(state.activeTopicId));
+      localStorage.setItem(MODE_KEY, JSON.stringify(state.mode));
+      localStorage.setItem(PRACTICE_ANSWERS_KEY, JSON.stringify(state.practiceAnswers));
+      localStorage.setItem(REPORT_KEY, JSON.stringify(state.latestReport));
+      localStorage.setItem(WRONGBOOK_KEY, JSON.stringify(state.wrongbook));
+      localStorage.setItem(VARIANT_ANSWERS_KEY, JSON.stringify(state.variantAnswers));
+      localStorage.setItem(ACCESS_KEY, JSON.stringify(state.accessProfile));
+      localStorage.setItem(REVOKED_KEY, JSON.stringify(Array.from(state.revokedHashes)));
+      localStorage.setItem(MANAGEMENT_LOG_KEY, JSON.stringify(state.managementLog));
+      localStorage.setItem(LESSON_SOUND_ENABLED_KEY, JSON.stringify(state.lessonSoundEnabled));
+    }
+
+    async function attemptUnlock() {
+      const code = normalizeCodeInput(unlockInput.value);
+      if (!code) {
+        unlockStatus.textContent = '请先输入授权码。';
+        unlockStatus.className = 'unlock-status error';
+        return;
+      }
+      const matched = await resolveLicenseCode(code);
+      const hash = matched?.hash;
+      const license = matched?.license;
+      if (!license) {
+        unlockStatus.textContent = '授权码无效，请检查后重新输入。';
+        unlockStatus.className = 'unlock-status error';
+        return;
+      }
+      if (state.revokedHashes.has(hash)) {
+        unlockStatus.textContent = '这个授权码已被停用，请联系家长或管理员更换。';
+        unlockStatus.className = 'unlock-status error';
+        return;
+      }
+      if (isLicenseExpired(license)) {
+        unlockStatus.textContent = `这个授权码已过期（截止 ${formatExpiry(license.expiresAt)}），请联系家长或管理员领取新卡密。`;
+        unlockStatus.className = 'unlock-status error';
+        return;
+      }
+      state.accessProfile = {
+        tier: license.tier,
+        hash,
+        label: license.label || (license.tier === 'parent' ? '家长查看码' : '学生学习码'),
+        unlockedAt: new Date().toISOString(),
+        expiresAt: license.expiresAt || null
+      };
+      if (license.tier === 'parent') {
+        state.view = 'home';
+        state.mode = 'report';
+      }
+      if (license.tier === 'student' && state.mode === 'management') {
+        state.mode = 'lesson';
+      }
+      localStorage.setItem(ACTIVE_CODE_HASH_KEY, JSON.stringify(hash));
+      localStorage.setItem(ACCESS_KEY, JSON.stringify(state.accessProfile));
+      if (license) {
+        localStorage.setItem(UNLOCK_KEY, JSON.stringify(true));
+        unlockStatus.textContent = license.tier === 'parent'
+          ? '家长端解锁成功，正在进入学习报告界面…'
+          : matched.corrected
+            ? '学生端解锁成功，已自动识别易混字符，正在进入学习空间…'
+            : '学生端解锁成功，正在进入学习空间…';
+        unlockStatus.className = 'unlock-status ok';
+        unlockShell.classList.add('hidden');
+        mainApp.classList.remove('hidden');
+        initializeExpansion();
+        render();
+      }
+    }
+
+    function normalizeCodeInput(value) {
+      const compact = String(value || '')
+        .trim()
+        .toUpperCase()
+        .replace(/[－—–\s]/g, '')
+        .replace(/[^A-Z0-9]/g, '');
+      if (/^[A-Z0-9]{15}$/.test(compact)) {
+        return `${compact.slice(0, 3)}-${compact.slice(3, 7)}-${compact.slice(7, 11)}-${compact.slice(11, 15)}`;
+      }
+      return String(value || '')
+        .trim()
+        .toUpperCase()
+        .replace(/[－—–]/g, '-')
+        .replace(/\s+/g, '');
+    }
+
+    async function resolveLicenseCode(code) {
+      for (const candidate of buildCodeCandidates(code)) {
+        const hash = await sha256(candidate);
+        const license = licenseRegistry.get(hash);
+        if (license) {
+          return { hash, license, code: candidate, corrected: candidate !== code };
+        }
+      }
+      return null;
+    }
+
+    function buildCodeCandidates(code) {
+      const confusable = {
+        O: ['0'],
+        0: ['O'],
+        I: ['1', 'L'],
+        L: ['1', 'I'],
+        1: ['I', 'L'],
+        Z: ['7', '2'],
+        7: ['Z'],
+        2: ['Z'],
+        S: ['5'],
+        5: ['S'],
+        B: ['8'],
+        8: ['B'],
+        G: ['6', '9'],
+        6: ['G'],
+        9: ['G'],
+        A: ['4'],
+        4: ['A']
+      };
+      const candidates = new Set([code]);
+      const replaceAt = (base, index, replacement) => `${base.slice(0, index)}${replacement}${base.slice(index + 1)}`;
+
+      for (let distance = 1; distance <= 2; distance++) {
+        const snapshot = Array.from(candidates);
+        for (const base of snapshot) {
+          const changed = [];
+          for (let i = 0; i < base.length; i++) {
+            if (base[i] !== code[i]) changed.push(i);
+          }
+          if (changed.length !== distance - 1) continue;
+          for (let i = 0; i < base.length; i++) {
+            if (changed.includes(i)) continue;
+            const replacements = confusable[base[i]];
+            if (!replacements) continue;
+            for (const replacement of replacements) {
+              candidates.add(replaceAt(base, i, replacement));
+              if (candidates.size >= 2500) return Array.from(candidates);
+            }
+          }
+        }
+      }
+      return Array.from(candidates);
+    }
+
+    async function sha256(text) {
+      const bytes = new TextEncoder().encode(text);
+      const digest = await crypto.subtle.digest('SHA-256', bytes);
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function isLicenseExpired(license) {
+      if (!license?.expiresAt) return false;
+      const expiresMs = new Date(license.expiresAt).getTime();
+      return Number.isFinite(expiresMs) ? Date.now() > expiresMs : false;
+    }
+
+    function formatExpiry(expiresAt) {
+      if (!expiresAt) return '长期有效';
+      const date = new Date(expiresAt);
+      if (Number.isNaN(date.getTime())) return expiresAt;
+      return date.toLocaleString('zh-CN', { hour12: false });
+    }
+
+    function initializeExpansion() {
+      const tree = buildTree(knowledgeItems);
+      tree.forEach((category, categoryIndex) => {
+        if (state.expandedCategories[category.name] === undefined) {
+          state.expandedCategories[category.name] = categoryIndex === 0;
+        }
+        category.subcategories.forEach((subcategory, subIndex) => {
+          const key = `${category.name}__${subcategory.name}`;
+          if (state.expandedSubcategories[key] === undefined) {
+            state.expandedSubcategories[key] = categoryIndex === 0 && subIndex === 0;
+          }
+        });
+      });
+    }
+
+    function buildTree(items) {
+      const map = new Map();
+      items.forEach(item => {
+        if (!map.has(item.category)) {
+          map.set(item.category, { name: item.category, subcategories: new Map() });
+        }
+        const cat = map.get(item.category);
+        if (!cat.subcategories.has(item.subcategory)) {
+          cat.subcategories.set(item.subcategory, { name: item.subcategory, topics: [] });
+        }
+        cat.subcategories.get(item.subcategory).topics.push(item);
+      });
+      return Array.from(map.values()).map(category => ({
+        name: category.name,
+        subcategories: Array.from(category.subcategories.values())
+      }));
+    }
+
+    function getActiveTopic() {
+      return knowledgeItems.find(item => item.id === state.activeTopicId) || knowledgeItems[0] || null;
+    }
+
+    function focusTopic(id, mode = state.mode) {
+      if (!id) return;
+      const topic = knowledgeItems.find(item => item.id === id);
+      if (!topic) return;
+      state.activeTopicId = topic.id;
+      state.mode = mode;
+      state.expandedCategories[topic.category] = true;
+      state.expandedSubcategories[`${topic.category}__${topic.subcategory}`] = true;
+      state.mobileSidebarOpen = false;
+      state.revealActiveTopic = true;
+    }
+
+    function revealActiveTopicInSidebar() {
+      if (state.view !== 'detail' || !state.revealActiveTopic) return;
+      window.requestAnimationFrame(() => {
+        const activeTopic = detailView.querySelector('.desktop-sidebar .topic.active');
+        const tree = detailView.querySelector('.desktop-sidebar .tree');
+        if (!activeTopic || !tree) return;
+        const activeRect = activeTopic.getBoundingClientRect();
+        const treeRect = tree.getBoundingClientRect();
+        if (activeRect.top < treeRect.top || activeRect.bottom > treeRect.bottom) {
+          tree.scrollTop += activeRect.top - treeRect.top - tree.clientHeight / 2 + activeRect.height / 2;
+        }
+        state.revealActiveTopic = false;
+      });
+    }
+
+    function firstTopicInCategory(categoryName) {
+      return knowledgeItems.find(item => item.category === categoryName);
+    }
+
+    function firstTopicInSubcategory(key) {
+      const [categoryName, ...subParts] = String(key || '').split('__');
+      const subcategoryName = subParts.join('__');
+      return knowledgeItems.find(item => item.category === categoryName && item.subcategory === subcategoryName);
+    }
+
+    function getCategoryStats() {
+      const stats = {};
+      knowledgeItems.forEach(item => {
+        if (!stats[item.category]) stats[item.category] = { total: 0, completed: 0 };
+        stats[item.category].total += 1;
+        if (state.completed.has(item.id)) stats[item.category].completed += 1;
+      });
+      ['数与代数', '图形与几何', '统计与概率', '综合与实践'].forEach(category => {
+        if (!stats[category]) stats[category] = { total: 0, completed: 0 };
+      });
+      return stats;
+    }
+
+    function getFilteredItems() {
+      const needle = state.search.trim().toLowerCase();
+      if (!needle) return knowledgeItems;
+      return knowledgeItems.filter(item =>
+        item.category.toLowerCase().includes(needle) ||
+        item.subcategory.toLowerCase().includes(needle) ||
+        item.topic.toLowerCase().includes(needle)
+      );
+    }
+
+    function openAllForSearch(filteredTree) {
+      if (!state.search.trim()) return;
+      filteredTree.forEach(category => {
+        state.expandedCategories[category.name] = true;
+        category.subcategories.forEach(sub => {
+          state.expandedSubcategories[`${category.name}__${sub.name}`] = true;
+        });
+      });
+    }
+
+    function normalizeOutlineText(text) {
+      return String(text || '')
+        .replace(/[“”"']/g, '')
+        .replace(/[《》]/g, '')
+        .replace(/[———-]/g, '')
+        .replace(/[、，,。！？：:（）()]/g, '')
+        .replace(/\s+/g, '')
+        .toLowerCase();
+    }
+
+    function findOutlineMatch(label) {
+      const normalizedLabel = normalizeOutlineText(label);
+      const exact = knowledgeItems.find(item => normalizeOutlineText(item.topic) === normalizedLabel);
+      if (exact) return { status: 'exact', item: exact, note: `已按目录原样收录：${exact.topic}` };
+
+      const prefix = label.match(/^(\d+\.\d+)/)?.[1] || '';
+      const candidates = knowledgeItems.filter(item => {
+        if (prefix && item.topic.startsWith(prefix)) return true;
+        return normalizeOutlineText(item.topic).includes(normalizedLabel) || normalizedLabel.includes(normalizeOutlineText(item.topic));
+      });
+
+      if (candidates.length) {
+        return {
+          status: 'mapped',
+          item: candidates[0],
+          note: `已拆分成 ${candidates.length} 个更细讲义点`,
+          sample: candidates.slice(0, 3).map(item => item.topic)
+        };
+      }
+
+      return { status: 'missing', item: null, note: '当前未找到对应讲义页' };
+    }
+
+    function renderOutlineAudit() {
+      return `
+        <div class="panel outline-panel">
+          <div class="outline-head">
+            <div>
+              <div class="outline-title">教材目录覆盖率</div>
+              <div class="outline-sub">这里按你上传的课本目录逐章核对。绿色表示目录标题已原样收录，粉色表示目录项已拆成更细的讲义页，但内容已经在应用里，橙色才表示真的缺失。</div>
+            </div>
+          </div>
+          <div class="outline-grid">
+            ${textbookOutline.map(section => {
+              const rows = section.items.map(label => ({ label, ...findOutlineMatch(label) }));
+              const covered = rows.filter(row => row.status !== 'missing').length;
+              return `
+                <section class="outline-chapter">
+                  <div class="outline-chapter-top">
+                    <div>
+                      <h3>${escapeHtml(section.chapter)}</h3>
+                      <div class="outline-meta">${escapeHtml(section.category)} · 已覆盖 ${covered} / ${rows.length}</div>
+                    </div>
+                    <div class="outline-count">${covered}/${rows.length}</div>
+                  </div>
+                  <div class="outline-list">
+                    ${rows.map(row => `
+                      <button class="outline-item" ${row.item ? `data-topic-jump="${escapeAttr(row.item.id)}"` : 'type="button"'} ${row.item ? '' : 'disabled'}>
+                        <div class="outline-item-top">
+                          <div class="outline-item-label">${escapeHtml(row.label)}</div>
+                          <span class="outline-status ${row.status}">${row.status === 'exact' ? '原样收录' : row.status === 'mapped' ? '已拆细讲' : '待补充'}</span>
+                        </div>
+                        <div class="outline-meta">
+                          ${escapeHtml(row.note)}
+                          ${row.sample?.length ? `<br />例如：${escapeHtml(row.sample.join('、'))}` : ''}
+                        </div>
+                      </button>
+                    `).join('')}
+                  </div>
+                </section>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function render() {
+      const stats = getCategoryStats();
+      const totalCompleted = state.completed.size;
+      const totalTopics = knowledgeItems.length;
+      totalProgressPill.textContent = `已学 ${totalCompleted} / ${totalTopics}`;
+      viewPill.textContent = `当前视图：${state.view === 'home' ? '主页仪表盘' : '学习详情页'}`;
+      rolePill.textContent = `当前身份：${state.accessProfile?.tier === 'parent' ? '家长端' : '学生端'}`;
+
+      if (state.view === 'home') {
+        renderHome(stats, totalCompleted, totalTopics);
+      } else {
+        renderDetail();
+      }
+
+      homeView.classList.toggle('hidden', state.view !== 'home');
+      detailView.classList.toggle('hidden', state.view !== 'detail');
+      mobileOverlay.classList.toggle('hidden', !state.mobileSidebarOpen);
+      revealActiveTopicInSidebar();
+      saveState();
+    }
+
+    function renderHome(stats, totalCompleted, totalTopics) {
+      const activeTopic = getActiveTopic();
+      const order = ['数与代数', '图形与几何', '统计与概率', '综合与实践'];
+      if (state.accessProfile?.tier === 'parent') {
+        homeView.innerHTML = renderParentHome(stats, totalCompleted, totalTopics, activeTopic);
+        bindParentHomeEvents();
+        return;
+      }
+      homeView.innerHTML = `
+        <div class="panel">
+          <div class="hero">
+            <div>
+              <div class="badge">AI超级学霸数学6年级 · 主页仪表盘</div>
+              <h1>六年级上册数学同步学习，一眼看清教材进度地图。</h1>
+              <p class="lead">
+                这版内容按你发送的六年级上册教材主线整理，主页负责总览，学习详情页负责逐个知识点学习。
+                勾选后会实时刷新进度，并自动保存在本地。
+              </p>
+              <div class="summary-grid">
+                <div class="summary-box green">
+                  <div class="summary-label">当前重点</div>
+                  <div class="summary-value">${escapeHtml(activeTopic ? activeTopic.topic : '从教材目录里挑一个开始')}</div>
+                </div>
+                <div class="summary-box blue">
+                  <div class="summary-label">今日已学</div>
+                  <div class="summary-value">${totalCompleted} 个知识点</div>
+                </div>
+                <div class="summary-box gray">
+                  <div class="summary-label">全书总量</div>
+                  <div class="summary-value">${totalTopics} 个知识点</div>
+                </div>
+              </div>
+              <div class="summary-grid">
+                <div class="summary-box green">
+                  <div class="summary-label">保留结构</div>
+                  <div class="summary-value">授权入口 + 主页仪表盘 + 四大模块卡片</div>
+                </div>
+                <div class="summary-box blue">
+                  <div class="summary-label">保留结构</div>
+                  <div class="summary-value">学习详情页 + 同步练习 + 测评报告</div>
+                </div>
+                <div class="summary-box gray">
+                  <div class="summary-label">保留结构</div>
+                  <div class="summary-value">错题本 + 变式练习</div>
+                </div>
+              </div>
+              <button class="primary-btn" id="enter-detail-btn">进入教材同步目录</button>
+            </div>
+            <div class="progress-wrap">
+              ${renderRing(totalCompleted, totalTopics)}
+            </div>
+          </div>
+        </div>
+        <div class="modules">
+          ${order.map(category => renderModuleCard(category, stats[category] || { total: 0, completed: 0 })).join('')}
+        </div>
+        ${renderOutlineAudit()}
+      `;
+
+      document.getElementById('enter-detail-btn').onclick = () => {
+        state.view = 'detail';
+        render();
+      };
+      Array.from(homeView.querySelectorAll('[data-category-enter]')).forEach(button => {
+        button.onclick = () => {
+          state.view = 'detail';
+          render();
+        };
+      });
+      Array.from(homeView.querySelectorAll('[data-topic-jump]')).forEach(button => {
+        button.onclick = () => {
+          state.activeTopicId = button.dataset.topicJump;
+          state.view = 'detail';
+          render();
+        };
+      });
+    }
+
+    function renderParentHome(stats, totalCompleted, totalTopics, activeTopic) {
+      const latestReport = state.latestReport;
+      const totalWrong = state.wrongbook.length;
+      const progressRate = totalTopics ? Math.round((totalCompleted / totalTopics) * 100) : 0;
+      return `
+        <div class="panel">
+          <div class="hero">
+            <div>
+              <div class="badge">家长端查看台</div>
+              <h1>一眼看懂孩子现在学到哪里，薄弱点卡在哪。</h1>
+              <p class="lead">
+                家长码进入后默认显示学习进度、最近一次测评报告和错题沉淀情况。这里是只读视图，不会改动孩子的学习记录。
+              </p>
+              <div class="readonly-banner">
+                <strong>当前为家长端只读模式</strong>
+                <p>可以查看报告、导出作废清单、批量停用或恢复卡密；不提供学生答题与勾选入口，避免误操作。</p>
+              </div>
+              <div class="management-actions">
+                <button class="primary-btn" id="open-parent-report-btn" style="margin-top:0;">查看学习详情</button>
+                <button class="secondary-btn" id="open-license-center-btn">进入卡密管理台</button>
+              </div>
+            </div>
+            <div class="progress-wrap">
+              ${renderRing(totalCompleted, totalTopics)}
+            </div>
+          </div>
+          <div class="parent-report-grid">
+            <div class="parent-stat">
+              <div class="label">学习进度</div>
+              <div class="value">${progressRate}%</div>
+            </div>
+            <div class="parent-stat">
+              <div class="label">最近得分</div>
+              <div class="value">${latestReport ? `${latestReport.totalScore}/${latestReport.total}` : '--'}</div>
+            </div>
+            <div class="parent-stat">
+              <div class="label">错题沉淀</div>
+              <div class="value">${totalWrong} 题</div>
+            </div>
+          </div>
+          <div class="summary-grid">
+            <div class="summary-box green">
+              <div class="summary-label">当前重点</div>
+              <div class="summary-value">${escapeHtml(activeTopic ? activeTopic.topic : '暂未选择知识点')}</div>
+            </div>
+            <div class="summary-box blue">
+              <div class="summary-label">最近测评</div>
+              <div class="summary-value">${escapeHtml(latestReport ? latestReport.paperTitle : '还未生成测评报告')}</div>
+            </div>
+            <div class="summary-box gray">
+              <div class="summary-label">关注短板</div>
+              <div class="summary-value">${escapeHtml(latestReport?.focusSkills?.[0] || '先完成一套练习再看薄弱点')}</div>
+            </div>
+          </div>
+        </div>
+        <div class="modules">
+          ${order.map(category => renderModuleCard(category, stats[category] || { total: 0, completed: 0 })).join('')}
+        </div>
+      `;
+    }
+
+    function bindParentHomeEvents() {
+      const reportBtn = document.getElementById('open-parent-report-btn');
+      if (reportBtn) reportBtn.onclick = () => {
+        state.view = 'detail';
+        state.mode = state.latestReport ? 'report' : 'wrongbook';
+        render();
+      };
+      const centerBtn = document.getElementById('open-license-center-btn');
+      if (centerBtn) centerBtn.onclick = () => {
+        state.view = 'detail';
+        state.mode = 'management';
+        render();
+      };
+      Array.from(homeView.querySelectorAll('[data-category-enter]')).forEach(button => {
+        button.onclick = () => {
+          state.view = 'detail';
+          state.mode = latestReadableMode();
+          render();
+        };
+      });
+    }
+
+    function renderRing(value, total) {
+      const size = 210;
+      const stroke = 16;
+      const radius = (size - stroke) / 2;
+      const circumference = 2 * Math.PI * radius;
+      const ratio = total === 0 ? 0 : value / total;
+      const dashOffset = circumference * (1 - ratio);
+      return `
+        <div class="ring-card">
+          <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+            <circle cx="${size/2}" cy="${size/2}" r="${radius}" fill="none" stroke="rgba(143, 222, 215, 0.26)" stroke-width="${stroke}"></circle>
+            <circle
+              cx="${size/2}"
+              cy="${size/2}"
+              r="${radius}"
+              fill="none"
+              stroke="url(#ringGradient)"
+              stroke-width="${stroke}"
+              stroke-linecap="round"
+              stroke-dasharray="${circumference}"
+              stroke-dashoffset="${dashOffset}"
+            ></circle>
+            <defs>
+              <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#8fded7"></stop>
+                <stop offset="100%" stop-color="#f7bfd5"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="ring-text">
+            <div>
+              <strong>${Math.round(ratio * 100)}%</strong>
+              <span>总进度</span>
+              <span>${value} / ${total} 已学</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderModuleCard(category, stat) {
+      const ratio = stat.total === 0 ? 0 : stat.completed / stat.total;
+      return `
+        <button class="module-card" data-category-enter="${escapeHtml(category)}">
+          <div class="module-top">
+            <div>
+              <div class="module-label">核心模块</div>
+              <h3>${escapeHtml(category)}</h3>
+              <p>${escapeHtml(categoryDescriptions[category] || '学习进度会同步更新到总览。')}</p>
+            </div>
+            <div class="module-count">
+              <strong>${stat.completed}</strong>
+              <span>/ ${stat.total}</span>
+            </div>
+          </div>
+          <div class="bar-row">
+            <span>学习详情</span>
+            <span>${Math.round(ratio * 100)}%</span>
+          </div>
+          <div class="bar"><span style="width:${ratio * 100}%"></span></div>
+        </button>
+      `;
+    }
+
+    function renderDetail() {
+      const activeTopic = getActiveTopic();
+      const filteredTree = buildTree(getFilteredItems());
+      openAllForSearch(filteredTree);
+      const readOnly = state.accessProfile?.tier === 'parent';
+
+      detailView.innerHTML = `
+        <div class="detail-layout">
+          <aside class="sidebar desktop-sidebar">${renderSidebar(filteredTree, false, readOnly)}</aside>
+          <div class="detail-main">
+            <div class="detail-toolbar">
+              <div class="toolbar-row">
+                <div class="toolbar-left">
+                  <button class="icon-btn mobile-only" id="open-mobile-menu">目录</button>
+                  <button class="ghost-btn" id="back-home-btn">返回主页</button>
+                  <div class="toolbar-divider"></div>
+                  <div>
+                    <div class="current-label">当前知识点</div>
+                    <div class="current-topic">${escapeHtml(activeTopic ? activeTopic.topic : '请选择一个知识点')}</div>
+                  </div>
+                </div>
+                <div class="toolbar-left">
+                  <div class="mode-tabs">
+                    <button class="mode-tab ${state.mode === 'lesson' ? 'active' : ''}" data-mode="lesson">知识讲义</button>
+                    ${readOnly ? '' : `<button class="mode-tab ${state.mode === 'practice' ? 'active' : ''}" data-mode="practice">同步练习</button>`}
+                    <button class="mode-tab ${state.mode === 'report' ? 'active' : ''}" data-mode="report">测评报告</button>
+                    <button class="mode-tab ${state.mode === 'wrongbook' ? 'active' : ''}" data-mode="wrongbook">错题本</button>
+                    <button class="mode-tab ${state.mode === 'variant' ? 'active' : ''}" data-mode="variant">变式练习</button>
+                    ${readOnly ? `<button class="mode-tab ${state.mode === 'management' ? 'active' : ''}" data-mode="management">卡密管理</button>` : ''}
+                  </div>
+                  <button class="export-btn" id="export-btn">导出课程表</button>
+                </div>
+              </div>
+              ${readOnly ? `<div class="readonly-banner"><strong>家长端只读模式</strong><p>可以查看讲义、测评报告、错题沉淀和卡密管理；学生勾选、答题与提交通道已隐藏。</p></div>` : ''}
+            </div>
+            <div class="content-wrap">
+              ${renderContentByMode(activeTopic)}
+            </div>
+          </div>
+        </div>
+      `;
+
+      mobileOverlay.innerHTML = `
+        <div class="sidebar mobile-drawer">
+          ${renderSidebar(filteredTree, true, readOnly)}
+        </div>
+      `;
+
+      bindDetailEvents();
+    }
+
+    function renderContentByMode(activeTopic) {
+      if (!activeTopic) return renderEmptyState();
+      if (state.mode === 'management' && state.accessProfile?.tier === 'parent') {
+        return renderLicenseManagement();
+      }
+      if (state.mode === 'lesson') {
+        return `
+          <div class="management-actions" style="margin-bottom:14px;">
+            <button class="secondary-btn" id="read-lesson-btn">朗读讲义</button>
+            <button class="secondary-btn" id="stop-lesson-sound-btn">停止朗读</button>
+            <button class="secondary-btn" id="toggle-lesson-sound-btn">${state.lessonSoundEnabled ? '关闭自动朗读' : '开启自动朗读'}</button>
+            <div class="meta-pill blue">${state.lessonSoundEnabled ? '讲义语音：开启' : '讲义语音：关闭'}</div>
+          </div>
+          <div id="lesson-audio-panel" class="readonly-banner" style="display:none;margin-bottom:14px;">
+            <strong>手机朗读播放器</strong>
+            <p id="lesson-audio-status">如果手机拦截自动朗读，请点下面播放器的播放键。</p>
+            <audio id="lesson-audio-control" controls preload="none" playsinline style="width:100%;margin-top:10px;"></audio>
+          </div>
+          <iframe id="lesson-frame" title="${escapeHtml(activeTopic.topic)}" src="./knowledge/${activeTopic.file}"></iframe>
+        `;
+      }
+      if (state.mode === 'practice') {
+        return renderPractice(activeTopic);
+      }
+      if (state.mode === 'report') return renderReport(activeTopic);
+      if (state.mode === 'variant') return renderWrongbook(activeTopic, true);
+      return renderWrongbook(activeTopic, false);
+    }
+
+    function getLessonReadText() {
+      const lessonFrame = document.getElementById('lesson-frame');
+      const doc = lessonFrame?.contentDocument || lessonFrame?.contentWindow?.document;
+      if (!doc) return '';
+      return Array.from(doc.querySelectorAll('[data-read]'))
+        .map(el => el.innerText.trim())
+        .filter(Boolean)
+        .join('。')
+        .replace(/\s+/g, ' ')
+        .slice(0, 1100);
+    }
+
+    let lessonAudioPlayer = null;
+    let lessonAudioChunks = [];
+    let lessonAudioIndex = 0;
+    let lessonAudioProviderIndex = 0;
+    let lessonAudioPlaying = false;
+    let speechEngineUnlocked = false;
+    let preferNativeSpeech = true;
+
+    function getChineseVoice() {
+      if (!('speechSynthesis' in window)) return null;
+      const voices = window.speechSynthesis.getVoices();
+      const chineseVoices = voices.filter(voice => /zh|Chinese|中文|普通话|Mandarin/i.test(`${voice.lang} ${voice.name}`));
+      return chineseVoices.find(voice => /xiaoxiao|xiaoyi|huihui|yaoyao|hanhan|tingting|xiaobei|xiaoni|female|女/i.test(`${voice.name} ${voice.lang}`))
+        || chineseVoices[0]
+        || null;
+    }
+
+    function canUseNativeSpeech() {
+      return 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined';
+    }
+
+    function unlockSpeechEngine() {
+      if (!canUseNativeSpeech() || speechEngineUnlocked) return;
+      try {
+        const utterance = new SpeechSynthesisUtterance(' ');
+        utterance.volume = 0;
+        utterance.lang = 'zh-CN';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+        speechEngineUnlocked = true;
+      } catch (error) {}
+    }
+
+    ['touchstart', 'click'].forEach(eventName => {
+      document.addEventListener(eventName, unlockSpeechEngine, { once: true, passive: true });
+    });
+
+    if (canUseNativeSpeech()) {
+      window.speechSynthesis.onvoiceschanged = getChineseVoice;
+    }
+
+    function splitLessonText(text) {
+      const parts = (String(text || '').replace(/\s+/g, ' ').match(/[^。！？；;!?]+[。！？；;!?]?/g) || [])
+        .map(part => part.trim())
+        .filter(Boolean);
+      const chunks = [];
+      let current = '';
+      parts.forEach(part => {
+        if ((current + part).length > 70 && current) {
+          chunks.push(current);
+          current = part;
+        } else {
+          current += part;
+        }
+      });
+      if (current) chunks.push(current);
+      const safeChunks = [];
+      chunks.forEach(chunk => {
+        if (chunk.length <= 90) {
+          safeChunks.push(chunk);
+          return;
+        }
+        for (let i = 0; i < chunk.length; i += 70) safeChunks.push(chunk.slice(i, i + 70));
+      });
+      return safeChunks;
+    }
+
+    function ttsUrl(text, providerIndex = 0) {
+      const encoded = encodeURIComponent(text);
+      if (providerIndex === 1) {
+        return `https://dict.youdao.com/dictvoice?audio=${encoded}&le=zh`;
+      }
+      return `https://fanyi.baidu.com/gettts?lan=zh&text=${encoded}&spd=5&source=web`;
+    }
+
+    function getCurrentLessonAudioUrl() {
+      const topic = getActiveTopic();
+      if (!topic?.file) return '';
+      return `./audio/${topic.file.replace(/\.html$/i, '.mp3')}?v=${AUDIO_VERSION}`;
+    }
+
+    function setLessonAudioStatus(message) {
+      const panel = document.getElementById('lesson-audio-panel');
+      const status = document.getElementById('lesson-audio-status');
+      if (panel) panel.style.display = 'block';
+      if (status) status.textContent = message;
+    }
+
+    function getVisibleLessonAudioPlayer() {
+      const audio = document.getElementById('lesson-audio-control');
+      if (audio) return audio;
+      if (!lessonAudioPlayer) {
+        lessonAudioPlayer = new Audio();
+        lessonAudioPlayer.preload = 'auto';
+        lessonAudioPlayer.setAttribute('playsinline', 'true');
+      }
+      return lessonAudioPlayer;
+    }
+
+    function stopRemoteLessonAudio() {
+      lessonAudioPlaying = false;
+      lessonAudioChunks = [];
+      lessonAudioIndex = 0;
+      lessonAudioProviderIndex = 0;
+      const visibleAudio = document.getElementById('lesson-audio-control');
+      [lessonAudioPlayer, visibleAudio].filter(Boolean).forEach(audio => {
+        audio.pause();
+        audio.removeAttribute('src');
+        audio.load();
+      });
+    }
+
+    function playNextLessonAudioChunk() {
+      if (!lessonAudioPlaying || !lessonAudioChunks.length) return;
+      if (lessonAudioIndex >= lessonAudioChunks.length) {
+        stopRemoteLessonAudio();
+        return;
+      }
+      lessonAudioPlayer = getVisibleLessonAudioPlayer();
+      lessonAudioPlayer.onended = () => {
+        lessonAudioProviderIndex = 0;
+        lessonAudioIndex += 1;
+        playNextLessonAudioChunk();
+      };
+      lessonAudioPlayer.onerror = () => {
+        if (/^(?:\.\/)?audio\/.+\.mp3/i.test(lessonAudioChunks[lessonAudioIndex])) {
+          lessonAudioChunks = splitLessonText(getLessonReadText());
+          lessonAudioIndex = 0;
+          lessonAudioProviderIndex = 0;
+          setLessonAudioStatus('本地音频暂时没加载成功，正在切换备用朗读音频。');
+          playNextLessonAudioChunk();
+          return;
+        }
+        if (lessonAudioProviderIndex === 0) {
+          lessonAudioProviderIndex = 1;
+          playNextLessonAudioChunk();
+          return;
+        }
+        lessonAudioProviderIndex = 0;
+        lessonAudioIndex += 1;
+        playNextLessonAudioChunk();
+      };
+      const currentChunk = lessonAudioChunks[lessonAudioIndex];
+      lessonAudioPlayer.src = /^(?:\.\/)?audio\/.+\.mp3/i.test(currentChunk)
+        ? currentChunk
+        : ttsUrl(currentChunk, lessonAudioProviderIndex);
+      lessonAudioPlayer.load();
+      const playPromise = lessonAudioPlayer.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+          setLessonAudioStatus('手机拦截了自动播放。请点下面播放器左侧的播放键，讲义就会读出来。');
+        });
+      }
+    }
+
+    function playRemoteLessonAudio(text, audioUrl = '') {
+      stopRemoteLessonAudio();
+      lessonAudioChunks = audioUrl ? [audioUrl] : splitLessonText(text);
+      if (!lessonAudioChunks.length) {
+        alert('讲义还在加载，稍等一下再点朗读。');
+        return;
+      }
+      setLessonAudioStatus('正在准备讲义音频。如果没有自动出声，请点下面播放器左侧的播放键。');
+      lessonAudioPlaying = true;
+      playNextLessonAudioChunk();
+    }
+
+    function speakWithNativeSpeech(text, fallbackAudioUrl = '') {
+      if (!canUseNativeSpeech()) return false;
+      try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'zh-CN';
+        utterance.rate = 0.88;
+        utterance.pitch = 1.02;
+        const voice = getChineseVoice();
+        if (voice) utterance.voice = voice;
+        utterance.onerror = () => {
+          preferNativeSpeech = false;
+          playRemoteLessonAudio(text, fallbackAudioUrl || getCurrentLessonAudioUrl());
+        };
+        window.speechSynthesis.speak(utterance);
+        window.setTimeout(() => {
+          if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+          if (!window.speechSynthesis.speaking && fallbackAudioUrl) {
+            preferNativeSpeech = false;
+            playRemoteLessonAudio(text, fallbackAudioUrl);
+          }
+        }, 260);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function speakLessonText(text, audioUrl = '') {
+      const cleanText = String(text || '').replace(/\s+/g, ' ').trim();
+      if (!cleanText) {
+        alert('讲义还在加载，稍等一下再点朗读。');
+        return;
+      }
+      stopRemoteLessonAudio();
+      const localAudioUrl = audioUrl || getCurrentLessonAudioUrl();
+      unlockSpeechEngine();
+      if (preferNativeSpeech && speakWithNativeSpeech(cleanText, localAudioUrl)) {
+        setLessonAudioStatus('正在使用手机原生语音朗读。如果没有声音，请点下面播放器播放真人感音频。');
+        const audio = getVisibleLessonAudioPlayer();
+        audio.src = localAudioUrl;
+        audio.load();
+        return;
+      }
+      if (localAudioUrl) {
+        playRemoteLessonAudio(cleanText, localAudioUrl);
+        return;
+      }
+      if (!canUseNativeSpeech()) {
+        playRemoteLessonAudio(cleanText);
+        return;
+      }
+      speakWithNativeSpeech(cleanText);
+    }
+
+    function speakCurrentLesson() {
+      speakLessonText(getLessonReadText(), getCurrentLessonAudioUrl());
+    }
+
+    function stopLessonReading() {
+      stopRemoteLessonAudio();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      const lessonFrame = document.getElementById('lesson-frame');
+      lessonFrame?.contentWindow?.postMessage({ type: 'lesson-sound-config', enabled: false }, '*');
+    }
+
+    window.speakLessonText = speakLessonText;
+    window.stopLessonReading = stopLessonReading;
+
+    function renderLicenseManagement() {
+      const revoked = state.revokedHashes;
+      const managementRows = [
+        ...studentLicenseRegistry.map((item, index) => ({
+          no: index + 1,
+          type: '学生学习码',
+          label: item.label || `学生码 ${String(index + 1).padStart(2, '0')}`,
+          hash: item.hash,
+          revoked: revoked.has(item.hash),
+          expired: isLicenseExpired(item),
+          expiresAt: item.expiresAt || null
+        })),
+        ...parentLicenseRegistry.map((item, index) => ({
+          no: index + 1,
+          type: '家长查看码',
+          label: item.label || `家长码 ${String(index + 1).padStart(2, '0')}`,
+          hash: item.hash,
+          revoked: revoked.has(item.hash),
+          expired: isLicenseExpired(item),
+          expiresAt: item.expiresAt || null
+        }))
+      ];
+      return `
+        <div class="management-wrap">
+          <div class="management-grid">
+            <div class="management-card">
+              <div class="management-title">卡密批量停用 / 恢复</div>
+              <div class="management-sub">每行输入一个明文卡密，点击后系统会自动换算并批量停用或恢复。本地纯前端版不会自动同步到其他设备，所以建议操作后顺手导出作废清单。</div>
+              <textarea id="management-bulk-input" class="code-textarea" placeholder="每行一个卡密，例如：&#10;AS6-DEMO-STUDENT&#10;AS7-26D3-F7H2&#10;PA7-31A4-C6E8">${escapeHtml(state.managementBulkInput || '')}</textarea>
+              <div class="management-actions">
+                <button class="export-btn" id="bulk-revoke-btn">批量停用</button>
+                <button class="secondary-btn" id="bulk-restore-btn">批量恢复</button>
+                <button class="ghost-btn" id="clear-management-input-btn">清空输入</button>
+              </div>
+              <div class="management-actions">
+                <button class="secondary-btn" id="export-revoked-btn">导出作废清单</button>
+                <button class="ghost-btn" id="import-revoked-btn">导入作废清单</button>
+                <input id="import-revoked-file" type="file" accept="application/json" style="display:none;" />
+              </div>
+              <div class="status-box">${escapeHtml(state.managementStatus || `当前已停用 ${revoked.size} 个卡密。`)}</div>
+            </div>
+            <div class="management-card">
+              <div class="management-title">管理说明</div>
+              <div class="management-sub">学生码用于孩子登录学习，家长码用于只读查看报告和管理卡密。建议把家长码单独保管，不给孩子长期持有。</div>
+              <div class="status-box">
+                学生码总数：${studentLicenseRegistry.length} 个<br />
+                家长码总数：${parentLicenseRegistry.length} 个<br />
+                已过期：${managementRows.filter(item => item.expired).length} 个<br />
+                当前停用：${revoked.size} 个<br />
+                最近操作：${escapeHtml(state.managementLog[0] || '暂未记录')}
+              </div>
+            </div>
+          </div>
+          <div class="management-card">
+            <div class="management-title">卡密状态总览</div>
+            <table class="code-table">
+              <thead>
+                <tr>
+                  <th>类型</th>
+                  <th>编号</th>
+                  <th>状态</th>
+                  <th>有效期</th>
+                  <th>校验摘要</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${managementRows.map(row => `
+                  <tr>
+                    <td>${escapeHtml(row.type)}</td>
+                    <td>${escapeHtml(row.label)}</td>
+                    <td><span class="tiny-chip ${row.revoked || row.expired ? 'warn' : 'info'}">${row.revoked ? '已停用' : row.expired ? '已过期' : '可使用'}</span></td>
+                    <td>${escapeHtml(formatExpiry(row.expiresAt))}</td>
+                    <td>${escapeHtml(row.hash.slice(0, 14))}...</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function getPracticePaper(activeTopic) {
+      return practicePapers[activeTopic.category] || practicePapers['综合与实践'];
+    }
+
+    function renderPractice(activeTopic) {
+      const paper = getPracticePaper(activeTopic);
+      const answeredCount = paper.questions.filter(question => {
+        const value = state.practiceAnswers[question.id];
+        return value !== undefined && String(value).trim() !== '';
+      }).length;
+      const totalScore = paper.questions.reduce((sum, item) => sum + item.score, 0);
+      return `
+        <div class="practice-wrap">
+          <div class="practice-head">
+            <div>
+              <div class="practice-title">${escapeHtml(paper.title)}</div>
+              <div class="practice-sub">${escapeHtml(paper.subtitle)}</div>
+            </div>
+            <div class="practice-meta">
+              <div class="metric-card">
+                <div class="metric-label">题目总数</div>
+                <div class="metric-value">${paper.questions.length}</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">已作答</div>
+                <div class="metric-value">${answeredCount}</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">试卷总分</div>
+                <div class="metric-value">${totalScore}</div>
+              </div>
+            </div>
+          </div>
+          <div class="practice-grid">
+            ${paper.questions.map(renderQuestionCard).join('')}
+          </div>
+          <div class="practice-actions">
+            <button class="secondary-btn" id="clear-practice-btn">清空本套答案</button>
+            <button class="export-btn" id="submit-practice-btn">提交并生成测评报告</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderQuestionCard(question, index) {
+      const current = state.practiceAnswers[question.id] || '';
+      return `
+        <div class="practice-card">
+          <div class="question-head">
+            <div>
+              <div class="question-title">${index + 1}. ${escapeHtml(question.prompt)}</div>
+              <div class="question-note">考查点：${escapeHtml(question.skill)} · ${escapeHtml(question.category)} · ${question.score} 分</div>
+            </div>
+            <div class="question-tag">${escapeHtml(question.type === 'choice' ? '选择题' : question.type === 'fill' ? '填空题' : '解答题')}</div>
+          </div>
+          ${question.type === 'choice' ? `
+            <div class="choice-grid">
+              ${question.options.map(option => {
+                const letter = option.split('.')[0].trim();
+                return `
+                  <label class="choice-item">
+                    <input type="radio" name="${escapeAttr(question.id)}" value="${escapeAttr(letter)}" data-practice-answer="${escapeAttr(question.id)}" ${current === letter ? 'checked' : ''} />
+                    <span>${escapeHtml(option)}</span>
+                  </label>
+                `;
+              }).join('')}
+            </div>
+          ` : `
+            <textarea class="answer-text" data-practice-text="${escapeAttr(question.id)}" placeholder="把你的思路、过程和答案写在这里">${escapeHtml(current)}</textarea>
+          `}
+        </div>
+      `;
+    }
+
+    function gradeCurrentPaper(activeTopic) {
+      const paper = getPracticePaper(activeTopic);
+      const rows = [];
+      let totalScore = 0;
+      const total = paper.questions.reduce((sum, item) => sum + item.score, 0);
+      const typeStats = {
+        '选择题': { score: 0, total: 0, wrong: 0 },
+        '填空题': { score: 0, total: 0, wrong: 0 },
+        '解答题': { score: 0, total: 0, wrong: 0 }
+      };
+
+      paper.questions.forEach((question, idx) => {
+        const raw = String(state.practiceAnswers[question.id] || '').trim();
+        let earned = 0;
+        let correct = false;
+
+        if (question.type === 'choice') {
+          correct = raw.toUpperCase() === question.answer.toUpperCase();
+          earned = correct ? question.score : 0;
+        } else if (question.type === 'fill') {
+          const normalized = raw.replace(/\s+/g, '').toLowerCase();
+          correct = question.answerText.some(item => normalized === String(item).replace(/\s+/g, '').toLowerCase());
+          earned = correct ? question.score : 0;
+        } else {
+          const normalized = raw.toLowerCase();
+          const hitCount = question.keywords.filter(keyword => normalized.includes(String(keyword).toLowerCase())).length;
+          const ratio = question.keywords.length === 0 ? 0 : hitCount / question.keywords.length;
+          earned = Math.round(question.score * Math.min(1, ratio));
+          correct = earned === question.score;
+        }
+
+        totalScore += earned;
+        typeStats[question.category].score += earned;
+        typeStats[question.category].total += question.score;
+        if (!correct) typeStats[question.category].wrong += 1;
+
+        rows.push({
+          no: idx + 1,
+          prompt: question.prompt,
+          skill: question.skill,
+          category: question.category,
+          max: question.score,
+          earned,
+          answer: raw || '未作答',
+          correctAnswer: getCorrectAnswerText(question),
+          explanation: getQuestionExplanation(question),
+          correct,
+          suggestion: correct
+            ? '这一题完成得不错，继续保持。'
+            : (question.type === 'solve'
+              ? `建议回看“${question.skill}”的思路表达，补上关键步骤和数学语言。`
+              : `建议重新练习“${question.skill}”这一类基础题。`)
+        });
+      });
+
+      const lost = total - totalScore;
+      const lostQuestions = rows.filter(item => item.earned < item.max);
+      const focusSkills = lostQuestions.slice(0, 4).map(item => `${item.no}题：${item.skill}`);
+      const weakCategories = Object.entries(typeStats)
+        .sort((a, b) => {
+          const rateA = a[1].total ? a[1].score / a[1].total : 1;
+          const rateB = b[1].total ? b[1].score / b[1].total : 1;
+          return rateA - rateB;
+        })
+        .map(([name]) => name);
+
+      const report = {
+        generatedAt: new Date().toLocaleString('zh-CN', { hour12: false }),
+        paperTitle: paper.title,
+        topic: activeTopic.topic,
+        category: activeTopic.category,
+        total,
+        totalScore,
+        lost,
+        rate: total ? Math.round((totalScore / total) * 100) : 0,
+        lostQuestionsCount: lostQuestions.length,
+        focusSkills,
+        rows,
+        typeStats,
+        classroomComment: buildClassroomComment(activeTopic, lostQuestions, weakCategories),
+        suggestions: buildSuggestions(activeTopic, weakCategories, focusSkills),
+        quote: buildQuote(total ? totalScore / total : 0)
+      };
+      return report;
+    }
+
+    function getCorrectAnswerText(question) {
+      if (question.type === 'choice') {
+        const matched = question.options?.find(option => option.split('.')[0].trim().toUpperCase() === question.answer.toUpperCase());
+        return matched || question.answer;
+      }
+      if (question.type === 'fill') {
+        return question.answerText?.[0] || '见解析';
+      }
+      return question.sample || '见解析中的参考步骤';
+    }
+
+    function getQuestionExplanation(question) {
+      if (question.sample) return question.sample;
+      const explanationMap = {
+        '分数乘法': '分数乘法先确定单位1。求一个数的几分之几是多少，用乘法，并注意先约分。',
+        '分数除法': '分数除法常用于单位1未知的问题。找到对应量和对应分率，再用对应量除以对应分率。',
+        '比': '比的前项和后项可同时乘或除以同一个不为 0 的数；按比例分配先求总份数。',
+        '百分数': '百分数表示一个数是另一个数的百分之几，通常先列除法，再化成百分数。',
+        '位置方向': '确定位置需要方向和距离；返回路线的方向相反，距离不变。',
+        '圆': '圆题先找半径或直径，再选择周长公式 C=2πr 或面积公式 S=πr²。',
+        '扇形': '扇形是圆的一部分，由一条弧和经过弧两端的两条半径围成。',
+        '统计图': '读统计图先看标题、总量、项目和百分比，结论必须来自图中数据。',
+        '数与形': '数形结合要把图形变化转化成数列或算式规律。',
+        '综合实践': '综合实践题重在过程表达：记录条件、说明方法、检查结果并反思。'
+      };
+      return explanationMap[question.skill] || '先回到教材定义，再看题目条件，把判断依据写清楚。';
+    }
+
+    function buildClassroomComment(activeTopic, lostQuestions, weakCategories) {
+      if (!lostQuestions.length) {
+        return `本次 ${activeTopic.category} 小测完成得很扎实，说明基础概念、基本运算和表达习惯都比较稳定。后续建议在保持正确率的前提下，继续提升做题速度和步骤书写的规范度。`;
+      }
+      const focus = weakCategories.slice(0, 2).join('、');
+      const examples = lostQuestions.slice(0, 3).map(item => `${item.no}题（${item.skill}）`).join('，');
+      return `本卷存在比较明显的薄弱环节，当前重点关注：${focus}。失分主要集中在 ${examples}。建议围绕同类题做一次讲评复盘，把概念、步骤和易错点重新梳理一遍。`;
+    }
+
+    function buildSuggestions(activeTopic, weakCategories, focusSkills) {
+      const suggestions = [];
+      if (weakCategories.includes('填空题')) {
+        suggestions.push('重点围绕填空题做专项复盘，先把概念和计算结果写准，再训练速度。');
+      }
+      if (weakCategories.includes('解答题')) {
+        suggestions.push('解答题要按考试格式写步骤，不跳步、不漏条件，先保住过程分。');
+      }
+      if (weakCategories.includes('选择题')) {
+        suggestions.push('选择题不要只凭感觉，建议养成“先判断依据，再选答案”的习惯。');
+      }
+      if (focusSkills.length) {
+        suggestions.push(`当天优先回看这些失分点：${focusSkills.join('；')}。`);
+      }
+      suggestions.push(`结合“${activeTopic.category}”这条主线，把同类知识点再做一轮 3 到 5 题的小练习。`);
+      return suggestions.slice(0, 4);
+    }
+
+    function buildWrongbookEntries(activeTopic, report) {
+      const paper = getPracticePaper(activeTopic);
+      return report.rows
+        .filter(item => item.earned < item.max)
+        .map(item => {
+          const question = paper.questions[item.no - 1];
+          const variants = (variantBank[item.skill] || []).map((variant, index) => ({
+            ...variant,
+            localId: `${item.no}-${variant.id || index}`
+          }));
+          return {
+            id: `${activeTopic.category}-${question.id}`,
+            topic: activeTopic.topic,
+            category: activeTopic.category,
+            skill: item.skill,
+            prompt: question.prompt,
+            userAnswer: item.answer,
+            correctAnswer: item.correctAnswer,
+            explanation: item.explanation,
+            score: `${item.earned}/${item.max}`,
+            diagnosis: item.suggestion,
+            textbookHint: buildTextbookHint(item.skill, activeTopic),
+            variants
+          };
+        });
+    }
+
+    function buildTextbookHint(skill, activeTopic) {
+      const hintMap = {
+        '分数乘法': '先确定单位1，再判断是不是求一个数的几分之几。',
+        '分数除法': '看到“已知几分之几是多少”，优先找对应量和对应分率。',
+        '比': '比、分数、除法能互相转化，化简时前后项同步处理。',
+        '百分数': '百分数本质是比较关系，先写除法，再化成百分数。',
+        '位置方向': '方向角和距离要同时出现，观测点变化时方向也要反过来。',
+        '圆': '先找半径或直径，再选择周长、面积或圆环公式。',
+        '扇形': '抓住圆心角、半径和弧，想清它是圆的一部分。',
+        '统计图': '先看标题、总量、项目和百分比，再做结论。',
+        '数与形': '把图形层数、点数或面积变化写成数列规律。',
+        '综合实践': '真实问题要有记录、解释、检查和反思。'
+      };
+      return `${activeTopic.category} · ${activeTopic.topic}：${hintMap[skill] || '先回到教材定义和例题，再做同类练习。'}`;
+    }
+    function buildQuote(rate) {
+      if (rate >= 0.85) return '稳扎稳打，继续把会做的题做得更漂亮。';
+      if (rate >= 0.6) return '基础已经搭起来了，下一步要把短板补成台阶。';
+      return '先别着急，找准最薄弱的一环，一环一环补，进步会很明显。';
+    }
+
+    function getReportSkillStats(report) {
+      const grouped = new Map();
+      report.rows.forEach(row => {
+        if (!grouped.has(row.skill)) {
+          grouped.set(row.skill, { skill: row.skill, total: 0, earned: 0, lost: 0, wrong: 0, questions: [] });
+        }
+        const stat = grouped.get(row.skill);
+        stat.total += row.max;
+        stat.earned += row.earned;
+        stat.lost += row.max - row.earned;
+        if (row.earned < row.max) {
+          stat.wrong += 1;
+          stat.questions.push(row.no);
+        }
+      });
+      return Array.from(grouped.values())
+        .filter(stat => stat.lost > 0)
+        .sort((a, b) => b.lost - a.lost || b.wrong - a.wrong);
+    }
+
+    function getSkillCause(skill) {
+      const causes = {
+        '分数乘法': '单位1和“求几分之几”关系容易混在一起，计算时约分意识还要加强。',
+        '分数除法': '对应量、对应分率、单位1三者关系没有完全锁定，容易把乘除法方向写反。',
+        '比': '化简比和按比例分配的总份数意识不够稳，前项后项同步变化容易漏掉。',
+        '百分数': '百分数本质是比较关系，容易在“谁和谁比、谁是单位1”上判断不准。',
+        '位置方向': '观测点变化后方向要相反，方向角和距离需要同时保留。',
+        '圆': '半径、直径、周长、面积公式之间切换不够熟，容易把公式或单位写混。',
+        '扇形': '对“扇形是圆的一部分”的结构理解还不够清楚，圆心角、半径和弧的关系要再看。',
+        '统计图': '读图时容易只看百分比，忽略标题、总量和项目之间的对应关系。',
+        '数与形': '图形规律还没有稳定转化成算式或数列，观察到表达之间需要多练。',
+        '综合实践': '过程表达不够完整，条件、方法、检查和反思容易缺一块。'
+      };
+      return causes[skill] || '相关概念和同类题迁移还不够稳，需要回到教材定义重新梳理。';
+    }
+
+    function getAbilityDiagnosis(report) {
+      const lostRows = report.rows.filter(row => row.earned < row.max);
+      const solveLost = lostRows.filter(row => row.category === '解答题').length;
+      const choiceLost = lostRows.filter(row => row.category === '选择题').length;
+      const fillLost = lostRows.filter(row => row.category === '填空题').length;
+      const points = [];
+      if (choiceLost) points.push(`<strong>概念判断：</strong>选择题失分说明定义和关键词还没有完全自动化，做题时建议先圈出“单位1、方向、总量、公式”等核心词。`);
+      if (fillLost) points.push(`<strong>计算与转化：</strong>填空题失分多半来自计算链条不够稳，尤其要检查约分、百分数互化、半径直径转换这类小步骤。`);
+      if (solveLost) points.push(`<strong>规范表达：</strong>解答题失分说明思路可能会，但步骤写得还不够完整；建议每题写清条件、列式、计算和答语。`);
+      if (!points.length) points.push(`<strong>综合表现：</strong>本次答题比较稳定，可以继续训练速度和更漂亮的步骤表达。`);
+      points.push(`<strong>学习状态：</strong>${report.rate >= 85 ? '当前掌握度较好，可以做少量拔高题保持手感。' : report.rate >= 60 ? '基础已经有了，接下来把高频失分点集中练一轮，进步会很快。' : '先不要急着刷很多题，建议每天只抓 1 到 2 个薄弱点，稳稳补起来。'}`);
+      return points;
+    }
+
+    function getParentActions(report) {
+      const skillStats = getReportSkillStats(report);
+      const topSkills = skillStats.slice(0, 3).map(item => item.skill).join('、') || '本单元核心概念';
+      return [
+        {
+          title: '抓手1：错题本升级要求',
+          body: `督促孩子整理错题时，不只写正确答案，还要补齐“错因、正确思路、同类题提醒”。重点围绕 ${topSkills} 做标记。`
+        },
+        {
+          title: '抓手2：专项突破计划',
+          body: `每天安排 10 到 15 分钟做同类小练，先做基础题保证准确率，再做 1 道稍有变化的题，训练迁移能力。`
+        },
+        {
+          title: '抓手3：口头讲题复盘',
+          body: '让孩子把一道错题讲给家长听：题目问什么、已知什么、为什么这样列式。讲得出来，才是真的更稳了。'
+        }
+      ];
+    }
+
+    function renderReportSkillLoss(report) {
+      const stats = getReportSkillStats(report);
+      if (!stats.length) return '<p class="doc-body">本次没有明显知识模块失分，基础掌握较稳。后续可以继续做少量变式题，保持题感。</p>';
+      return `
+        <ol class="doc-list">
+          ${stats.map(stat => `
+            <li>
+              <strong>${escapeHtml(stat.skill)}：</strong>失分约 <strong>${Math.round((stat.lost / report.total) * 100)}%</strong>（涉及第 ${stat.questions.join('、')} 题）。
+              <ul class="doc-sublist">
+                <li><strong>主要原因：</strong>${escapeHtml(getSkillCause(stat.skill))}</li>
+              </ul>
+            </li>
+          `).join('')}
+        </ol>
+      `;
+    }
+
+    function renderTypicalWrongDeepDive(report) {
+      const wrongRows = report.rows.filter(row => row.earned < row.max).slice(0, 3);
+      if (!wrongRows.length) {
+        return '<p class="doc-body">本次没有典型错题需要深挖。可以从错题本里挑 1 到 2 道旧题做复查，防止遗忘。</p>';
+      }
+      return wrongRows.map(row => `
+        <div class="wrong-deep-card">
+          <div class="wrong-deep-title">${row.no}. 题目：${escapeHtml(row.prompt)}</div>
+          <ul class="doc-list">
+            <li><strong>错误答案：</strong>${escapeHtml(row.answer || '未作答')}（本题得分 ${row.earned}/${row.max}）</li>
+            <li><strong>错误原因：</strong>${escapeHtml(row.suggestion)}</li>
+            <li><strong>正确思路要点：</strong>${escapeHtml(row.explanation || '先回到教材定义，再看题目条件。')}</li>
+            <li><strong>归因：</strong>${escapeHtml(getSkillCause(row.skill))}</li>
+          </ul>
+        </div>
+      `).join('');
+    }
+
+    function renderReport(activeTopic) {
+      const report = state.latestReport && state.latestReport.category === activeTopic.category
+        ? state.latestReport
+        : null;
+
+      if (!report) {
+        return `
+          <div class="empty-state">
+            <div>
+              <h2>先完成一套同步练习，再生成测评报告</h2>
+              <p>做完同步练习并点击“提交并生成测评报告”后，这里会出现像家长汇报单一样的分析页面，帮助家长看懂你的得分情况和短板位置。</p>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="report-document">
+          <div class="doc-title">📝 六年级数学试卷分析</div>
+
+          <section class="doc-section">
+            <div class="doc-heading">📊 考试总体定位</div>
+            <p class="doc-body">
+              本次测评为 <strong>${escapeHtml(report.paperTitle)}</strong>，总分 <strong>${report.total}</strong> 分，当前得分 <strong>${report.totalScore}</strong> 分，得分率 <strong>${report.rate}%</strong>。
+              ${escapeHtml(report.classroomComment)}
+            </p>
+          </section>
+
+          <section class="doc-section">
+            <div class="doc-heading">🧾 知识模块失分表</div>
+            ${renderReportSkillLoss(report)}
+          </section>
+
+          <section class="doc-section">
+            <div class="doc-heading">🧠 能力维度诊断</div>
+            <ul class="doc-list">
+              ${getAbilityDiagnosis(report).map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </section>
+
+          <section class="doc-section">
+            <div class="doc-heading">🔍 典型错题深挖</div>
+            ${renderTypicalWrongDeepDive(report)}
+          </section>
+
+          <section class="doc-section">
+            <div class="doc-heading">📝 给家长的 3 个可执行抓手</div>
+            ${getParentActions(report).map(action => `
+              <div class="parent-action-title">${escapeHtml(action.title)}</div>
+              <p class="doc-body">${escapeHtml(action.body)}</p>
+            `).join('')}
+          </section>
+
+          <section class="doc-section">
+            <div class="doc-heading">🌱 给孩子的一句话</div>
+            <p class="doc-body">“${escapeHtml(report.quote)}”</p>
+          </section>
+        </div>
+      `;
+    }
+
+    function renderWrongbook(activeTopic, variantOnly = false) {
+      const entries = state.wrongbook.filter(item => item.category === activeTopic.category);
+      if (!entries.length) {
+        return `
+          <div class="empty-state">
+            <div>
+              <h2>${variantOnly ? '还没有可练习的变式题' : '还没有错题本内容'}</h2>
+              <p>${variantOnly ? '先完成同步练习并生成测评报告，系统会根据错题自动生成举一反三的变式练习。' : '先完成同步练习并提交，做错的题会自动沉淀到错题本。以后你就能围绕薄弱点反复练，还能直接做举一反三变式题。'}</p>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="wrongbook-wrap">
+          <div class="report-card">
+            <div class="wrongbook-head">
+              <div>
+                <div class="wrongbook-title">${variantOnly ? '变式练习' : '错题本'}</div>
+                <div class="wrongbook-sub">这里会自动记录你做错的题、失分原因、教材提示和举一反三练习，方便后续反复练薄弱点。</div>
+              </div>
+              <div class="meta-pill green">当前收录 ${entries.length} 题</div>
+            </div>
+          </div>
+          <div class="wrongbook-grid">
+            ${entries.map(renderWrongCard).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function getWrongEntryVariants(entry) {
+      const current = Array.isArray(entry.variants) ? [...entry.variants] : [];
+      const seen = new Set(current.map(item => item.id || item.prompt));
+      (variantBank[entry.skill] || []).forEach((variant, index) => {
+        const key = variant.id || variant.prompt;
+        if (seen.has(key)) return;
+        current.push({ ...variant, localId: `${entry.skill}-${variant.id || index}` });
+        seen.add(key);
+      });
+      return current.slice(0, 3).map((variant, index) => ({
+        ...variant,
+        localId: variant.localId || `${entry.skill}-${index}`
+      }));
+    }
+
+    function renderWrongCard(entry) {
+      const variants = getWrongEntryVariants(entry);
+      return `
+        <div class="wrong-card">
+          <div class="wrong-top">
+            <div>
+              <div class="wrong-title">${escapeHtml(entry.prompt)}</div>
+              <div class="wrong-meta">知识点：${escapeHtml(entry.skill)} · 所属章节：${escapeHtml(entry.topic)} · 上次得分：${escapeHtml(entry.score)}</div>
+            </div>
+            <div class="wrong-chip">自动沉淀</div>
+          </div>
+          <div class="wrong-sections">
+            <div class="wrong-box">
+              <h4>我的答案 / 正确答案</h4>
+              <p>我的答案：${escapeHtml(entry.userAnswer || '未作答')}</p>
+              <p>正确答案：${escapeHtml(entry.correctAnswer || '见解析')}</p>
+            </div>
+            <div class="wrong-box">
+              <h4>教材回看提示</h4>
+              <p>${escapeHtml(entry.textbookHint)}</p>
+            </div>
+          </div>
+          <div class="wrong-box" style="margin-top:14px;">
+            <h4>正确答案解析</h4>
+            <p>${escapeHtml(entry.explanation || entry.diagnosis)}</p>
+          </div>
+          <div class="wrong-box" style="margin-top:14px;">
+            <h4>错误诊断</h4>
+            <p>${escapeHtml(entry.diagnosis)}</p>
+          </div>
+          <div class="variant-list">
+            ${variants.length ? variants.map(variant => renderVariantCard(entry, variant)).join('') : `<div class="wrong-box"><h4>举一反三</h4><p>这个知识点暂时没有录入变式题，后续可以继续扩充。</p></div>`}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderVariantCard(entry, variant) {
+      const answerKey = `${entry.id}__${variant.localId}`;
+      const current = state.variantAnswers[answerKey] || '';
+      return `
+        <div class="variant-card">
+          <div class="variant-title">举一反三：${escapeHtml(variant.prompt)}</div>
+          <div class="variant-actions">
+            ${variant.type === 'choice'
+              ? variant.options.map(option => {
+                  const letter = option.split('.')[0].trim();
+                  return `
+                    <label class="choice-item" style="margin:0;">
+                      <input type="radio" name="${escapeAttr(answerKey)}" value="${escapeAttr(letter)}" data-variant-answer="${escapeAttr(answerKey)}" ${current === letter ? 'checked' : ''} />
+                      <span>${escapeHtml(option)}</span>
+                    </label>
+                  `;
+                }).join('')
+              : `<input class="variant-input" data-variant-text="${escapeAttr(answerKey)}" value="${escapeAttr(current)}" placeholder="把你的答案写在这里" />`
+            }
+          </div>
+          <div class="variant-actions">
+            <button class="secondary-btn" data-check-variant="${escapeAttr(answerKey)}" data-variant-meta="${escapeAttr(JSON.stringify({
+              type: variant.type,
+              answer: variant.answer || '',
+              answerText: variant.answerText || [],
+              keywords: variant.keywords || [],
+              explanation: variant.explanation || ''
+            }))}">检查这题</button>
+          </div>
+          <div class="variant-result" id="variant-result-${escapeAttr(answerKey)}">${state.variantAnswers[`result:${answerKey}`] ? escapeHtml(state.variantAnswers[`result:${answerKey}`]) : '完成后点“检查这题”，系统会告诉你这道变式题掌握得怎么样。'}</div>
+        </div>
+      `;
+    }
+
+    function percent(stat) {
+      return stat.total ? Math.round((stat.score / stat.total) * 100) : 0;
+    }
+
+    function renderRateRow(label, value) {
+      return `
+        <div class="rate-row">
+          <div class="rate-label">${escapeHtml(label)}</div>
+          <div class="rate-bar"><span style="width:${value}%"></span></div>
+          <div class="rate-value">${value}%</div>
+        </div>
+      `;
+    }
+
+    function renderSidebar(tree, mobile, readOnly) {
+      return `
+        <div class="side-head">
+          <div>
+            <div class="side-title">${readOnly ? '家长查看页' : '学习详情页'}</div>
+            <div class="side-sub">${readOnly ? '三级目录 + 搜索 + 只读查看' : '三级目录 + 搜索 + 勾选同步'}</div>
+          </div>
+          ${mobile ? `<button class="icon-btn" id="close-mobile-menu">关</button>` : ''}
+        </div>
+        <div class="search-wrap">
+          <input id="${mobile ? 'mobile-search-input' : 'search-input'}" value="${escapeAttr(state.search)}" placeholder="搜索分类、子分类或知识点" />
+        </div>
+        <div class="tree">
+          ${tree.map(category => renderCategory(category)).join('')}
+        </div>
+      `;
+    }
+
+    function renderCategory(category) {
+      const categoryOpen = !!state.expandedCategories[category.name];
+      const categoryTotal = category.subcategories.reduce((sum, sub) => sum + sub.topics.length, 0);
+      const categoryDone = category.subcategories.reduce((sum, sub) => sum + sub.topics.filter(item => state.completed.has(item.id)).length, 0);
+      return `
+        <div class="cat" data-category-name="${escapeAttr(category.name)}">
+          <button class="cat-btn" data-toggle-category="${escapeAttr(category.name)}">
+            <div>
+              <div class="cat-title">${escapeHtml(category.name)}</div>
+              <div class="cat-meta" data-category-meta="${escapeAttr(category.name)}">${categoryDone} / ${categoryTotal} 已学</div>
+            </div>
+            <span>${categoryOpen ? '⌃' : '⌄'}</span>
+          </button>
+          ${categoryOpen ? `<div>${category.subcategories.map(sub => renderSubcategory(category.name, sub)).join('')}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function renderSubcategory(categoryName, subcategory) {
+      const key = `${categoryName}__${subcategory.name}`;
+      const subOpen = !!state.expandedSubcategories[key];
+      const subDone = subcategory.topics.filter(item => state.completed.has(item.id)).length;
+      return `
+        <div class="sub-wrap" data-subcategory-name="${escapeAttr(key)}">
+          <button class="sub-btn" data-toggle-subcategory="${escapeAttr(key)}">
+            <div>
+              <div class="sub-title">${escapeHtml(subcategory.name)}</div>
+              <div class="sub-meta" data-subcategory-meta="${escapeAttr(key)}">${subDone} / ${subcategory.topics.length} 已学</div>
+            </div>
+            <span>${subOpen ? '⌃' : '⌄'}</span>
+          </button>
+          ${subOpen ? `<div class="topic-list">${subcategory.topics.map(renderTopic).join('')}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function renderTopic(item) {
+      const checked = state.completed.has(item.id);
+      const active = state.activeTopicId === item.id;
+      return `
+        <div class="topic ${active ? 'active' : ''}" data-topic-row="${escapeAttr(item.id)}">
+          <input type="checkbox" data-toggle-topic="${escapeAttr(item.id)}" ${checked ? 'checked' : ''} />
+          <button class="topic-btn" data-select-topic="${escapeAttr(item.id)}">
+            <div class="topic-name">${escapeHtml(item.topic)}</div>
+            <div class="topic-grade">${escapeHtml(item.grade)}</div>
+          </button>
+          <div class="tick">${checked ? '✓' : ''}</div>
+        </div>
+      `;
+    }
+
+    function renderEmptyState() {
+      return `
+        <div class="empty-state">
+          <div>
+            <h2>从左侧选一个知识点开始学习</h2>
+            <p>右侧会载入对应知识点的教材同步学习页。每个页面都可以继续替换成更完整的讲义、例题和练习。</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function countCompletedInCategory(categoryName) {
+      const items = knowledgeItems.filter(item => item.category === categoryName);
+      return { completed: items.filter(item => state.completed.has(item.id)).length, total: items.length };
+    }
+
+    function countCompletedInSubcategory(key) {
+      const [categoryName, subcategoryName] = key.split('__');
+      const items = knowledgeItems.filter(item => item.category === categoryName && item.subcategory === subcategoryName);
+      return { completed: items.filter(item => state.completed.has(item.id)).length, total: items.length };
+    }
+
+    function refreshCompletionUi() {
+      totalProgressPill.textContent = `已学 ${state.completed.size} / ${knowledgeItems.length}`;
+      detailView.querySelectorAll('[data-topic-row]').forEach(row => {
+        const id = row.getAttribute('data-topic-row');
+        const checked = state.completed.has(id);
+        const input = row.querySelector('[data-toggle-topic]');
+        const tick = row.querySelector('.tick');
+        if (input) input.checked = checked;
+        if (tick) tick.textContent = checked ? '✓' : '';
+      });
+      detailView.querySelectorAll('[data-category-meta]').forEach(meta => {
+        const stat = countCompletedInCategory(meta.getAttribute('data-category-meta'));
+        meta.textContent = `${stat.completed} / ${stat.total} 已学`;
+      });
+      detailView.querySelectorAll('[data-subcategory-meta]').forEach(meta => {
+        const stat = countCompletedInSubcategory(meta.getAttribute('data-subcategory-meta'));
+        meta.textContent = `${stat.completed} / ${stat.total} 已学`;
+      });
+    }
+
+    function refreshActiveTopicUi() {
+      const activeTopic = getActiveTopic();
+      detailView.querySelectorAll('[data-topic-row]').forEach(row => {
+        row.classList.toggle('active', row.getAttribute('data-topic-row') === state.activeTopicId);
+      });
+      detailView.querySelectorAll('.current-topic').forEach(node => {
+        node.textContent = activeTopic ? activeTopic.topic : '请选择一个知识点';
+      });
+    }
+
+    function refreshDetailContentOnly() {
+      const contentWrap = detailView.querySelector('.content-wrap');
+      if (!contentWrap) return;
+      contentWrap.innerHTML = renderContentByMode(getActiveTopic());
+      bindDetailEvents();
+    }
+
+    function bindDetailEvents() {
+      const backBtn = document.getElementById('back-home-btn');
+      if (backBtn) backBtn.onclick = () => { state.view = 'home'; render(); };
+
+      const exportBtn = document.getElementById('export-btn');
+      if (exportBtn) exportBtn.onclick = exportUncheckedTopics;
+
+      const toggleLessonSoundBtn = document.getElementById('toggle-lesson-sound-btn');
+      const readLessonBtn = document.getElementById('read-lesson-btn');
+      const stopLessonSoundBtn = document.getElementById('stop-lesson-sound-btn');
+      const lessonFrame = document.getElementById('lesson-frame');
+      const syncLessonSoundConfig = () => {
+        lessonFrame?.contentWindow?.postMessage({
+          type: 'lesson-sound-config',
+          enabled: state.lessonSoundEnabled
+        }, '*');
+      };
+      if (toggleLessonSoundBtn) {
+        toggleLessonSoundBtn.onclick = () => {
+          state.lessonSoundEnabled = !state.lessonSoundEnabled;
+          syncLessonSoundConfig();
+          render();
+        };
+      }
+      if (readLessonBtn) readLessonBtn.onclick = speakCurrentLesson;
+      if (stopLessonSoundBtn) stopLessonSoundBtn.onclick = stopLessonReading;
+      if (lessonFrame) {
+        lessonFrame.addEventListener('load', () => {
+          syncLessonSoundConfig();
+          window.setTimeout(syncLessonSoundConfig, 300);
+        });
+      }
+
+      const readOnly = state.accessProfile?.tier === 'parent';
+
+      detailView.querySelectorAll('[data-mode]').forEach(button => {
+        button.onclick = () => {
+          state.mode = button.getAttribute('data-mode');
+          if (readOnly && state.mode === 'practice') state.mode = 'report';
+          render();
+        };
+      });
+
+      const openMobileBtn = document.getElementById('open-mobile-menu');
+      if (openMobileBtn) openMobileBtn.onclick = () => {
+        state.mobileSidebarOpen = true;
+        render();
+      };
+
+      const closeMobileBtn = document.getElementById('close-mobile-menu');
+      if (closeMobileBtn) closeMobileBtn.onclick = () => {
+        state.mobileSidebarOpen = false;
+        render();
+      };
+
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.oninput = event => {
+          state.search = event.target.value;
+          window.clearTimeout(searchRenderTimer);
+          searchRenderTimer = window.setTimeout(render, 140);
+        };
+      }
+      const mobileSearchInput = document.getElementById('mobile-search-input');
+      if (mobileSearchInput) {
+        mobileSearchInput.oninput = event => {
+          state.search = event.target.value;
+          window.clearTimeout(searchRenderTimer);
+          searchRenderTimer = window.setTimeout(render, 140);
+        };
+      }
+
+      detailView.querySelectorAll('[data-toggle-category]').forEach(button => {
+        button.onclick = () => {
+          const key = button.getAttribute('data-toggle-category');
+          const willOpen = !state.expandedCategories[key];
+          state.expandedCategories[key] = willOpen;
+          if (willOpen) {
+            const first = firstTopicInCategory(key);
+            focusTopic(first?.id);
+          }
+          render();
+        };
+      });
+      detailView.querySelectorAll('[data-toggle-subcategory]').forEach(button => {
+        button.onclick = () => {
+          const key = button.getAttribute('data-toggle-subcategory');
+          const willOpen = !state.expandedSubcategories[key];
+          state.expandedSubcategories[key] = willOpen;
+          if (willOpen) {
+            const first = firstTopicInSubcategory(key);
+            focusTopic(first?.id);
+          }
+          render();
+        };
+      });
+      detailView.querySelectorAll('[data-select-topic]').forEach(button => {
+        button.onclick = () => {
+          const id = button.getAttribute('data-select-topic');
+          const changedTopic = state.activeTopicId !== id;
+          const fromMobileDrawer = !!button.closest('.mobile-drawer');
+          focusTopic(id);
+          saveState();
+          if (fromMobileDrawer) {
+            render();
+            return;
+          }
+          refreshActiveTopicUi();
+          if (changedTopic) refreshDetailContentOnly();
+        };
+      });
+      detailView.querySelectorAll('[data-toggle-topic]').forEach(input => {
+        input.onchange = () => {
+          if (readOnly) return;
+          const id = input.getAttribute('data-toggle-topic');
+          const changedTopic = state.activeTopicId !== id;
+          const fromMobileDrawer = !!input.closest('.mobile-drawer');
+          focusTopic(id);
+          if (state.completed.has(id)) state.completed.delete(id);
+          else state.completed.add(id);
+          saveState();
+          refreshCompletionUi();
+          refreshActiveTopicUi();
+          if (changedTopic || fromMobileDrawer) {
+            if (fromMobileDrawer) {
+              render();
+            } else {
+              refreshDetailContentOnly();
+            }
+          }
+        };
+      });
+
+      detailView.querySelectorAll('[data-practice-answer]').forEach(input => {
+        input.onchange = () => {
+          state.practiceAnswers[input.getAttribute('data-practice-answer')] = input.value;
+          saveState();
+        };
+      });
+      detailView.querySelectorAll('[data-practice-text]').forEach(textarea => {
+        textarea.oninput = () => {
+          state.practiceAnswers[textarea.getAttribute('data-practice-text')] = textarea.value;
+          saveState();
+        };
+      });
+      const clearPracticeBtn = document.getElementById('clear-practice-btn');
+      if (clearPracticeBtn) {
+        clearPracticeBtn.onclick = () => {
+          const activeTopic = getActiveTopic();
+          const paper = getPracticePaper(activeTopic);
+          paper.questions.forEach(question => { delete state.practiceAnswers[question.id]; });
+          state.latestReport = null;
+          render();
+        };
+      }
+      const submitPracticeBtn = document.getElementById('submit-practice-btn');
+      if (submitPracticeBtn) {
+        submitPracticeBtn.onclick = () => {
+          const activeTopic = getActiveTopic();
+          state.latestReport = gradeCurrentPaper(activeTopic);
+          mergeWrongbook(buildWrongbookEntries(activeTopic, state.latestReport));
+          state.mode = 'report';
+          render();
+        };
+      }
+
+      const managementInput = document.getElementById('management-bulk-input');
+      if (managementInput) {
+        managementInput.oninput = event => {
+          state.managementBulkInput = event.target.value;
+          saveState();
+        };
+      }
+      const bulkRevokeBtn = document.getElementById('bulk-revoke-btn');
+      if (bulkRevokeBtn) bulkRevokeBtn.onclick = () => applyBulkCodeStatus('revoke');
+      const bulkRestoreBtn = document.getElementById('bulk-restore-btn');
+      if (bulkRestoreBtn) bulkRestoreBtn.onclick = () => applyBulkCodeStatus('restore');
+      const clearManagementBtn = document.getElementById('clear-management-input-btn');
+      if (clearManagementBtn) clearManagementBtn.onclick = () => {
+        state.managementBulkInput = '';
+        state.managementStatus = '已清空输入框。';
+        render();
+      };
+      const exportRevokedBtn = document.getElementById('export-revoked-btn');
+      if (exportRevokedBtn) exportRevokedBtn.onclick = exportRevokedList;
+      const importRevokedBtn = document.getElementById('import-revoked-btn');
+      const importRevokedFile = document.getElementById('import-revoked-file');
+      if (importRevokedBtn && importRevokedFile) {
+        importRevokedBtn.onclick = () => importRevokedFile.click();
+        importRevokedFile.onchange = event => importRevokedList(event.target.files?.[0]);
+      }
+
+      detailView.querySelectorAll('[data-variant-answer]').forEach(input => {
+        input.onchange = () => {
+          state.variantAnswers[input.getAttribute('data-variant-answer')] = input.value;
+          saveState();
+        };
+      });
+      detailView.querySelectorAll('[data-variant-text]').forEach(input => {
+        input.oninput = () => {
+          state.variantAnswers[input.getAttribute('data-variant-text')] = input.value;
+          saveState();
+        };
+      });
+      detailView.querySelectorAll('[data-check-variant]').forEach(button => {
+        button.onclick = () => {
+          const key = button.getAttribute('data-check-variant');
+          const meta = JSON.parse(button.getAttribute('data-variant-meta'));
+          const answer = String(state.variantAnswers[key] || '').trim();
+          const result = checkVariantAnswer(answer, meta);
+          state.variantAnswers[`result:${key}`] = result;
+          saveState();
+          render();
+        };
+      });
+
+      mobileOverlay.onclick = event => {
+        if (event.target === mobileOverlay) {
+          state.mobileSidebarOpen = false;
+          render();
+        }
+      };
+      mobileOverlay.querySelectorAll('[data-toggle-category]').forEach(button => {
+        button.onclick = () => {
+          const key = button.getAttribute('data-toggle-category');
+          const willOpen = !state.expandedCategories[key];
+          state.expandedCategories[key] = willOpen;
+          if (willOpen) {
+            const first = firstTopicInCategory(key);
+            focusTopic(first?.id);
+          }
+          render();
+        };
+      });
+      mobileOverlay.querySelectorAll('[data-toggle-subcategory]').forEach(button => {
+        button.onclick = () => {
+          const key = button.getAttribute('data-toggle-subcategory');
+          const willOpen = !state.expandedSubcategories[key];
+          state.expandedSubcategories[key] = willOpen;
+          if (willOpen) {
+            const first = firstTopicInSubcategory(key);
+            focusTopic(first?.id);
+          }
+          render();
+        };
+      });
+      mobileOverlay.querySelectorAll('[data-select-topic]').forEach(button => {
+        button.onclick = () => {
+          focusTopic(button.getAttribute('data-select-topic'));
+          render();
+        };
+      });
+      mobileOverlay.querySelectorAll('[data-toggle-topic]').forEach(input => {
+        input.onchange = () => {
+          if (readOnly) return;
+          const id = input.getAttribute('data-toggle-topic');
+          focusTopic(id);
+          if (state.completed.has(id)) state.completed.delete(id);
+          else state.completed.add(id);
+          render();
+        };
+      });
+    }
+
+    function exportUncheckedTopics() {
+      const unchecked = knowledgeItems.filter(item => !state.completed.has(item.id));
+      const rows = ['分类,子分类,知识点名称,对应年级', ...unchecked.map(item => `${item.category},${item.subcategory},${item.topic},${item.grade}`)];
+      const blob = new Blob(['\ufeff' + rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = '未勾选知识点.csv';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function mergeWrongbook(entries) {
+      const map = new Map(state.wrongbook.map(item => [item.id, item]));
+      entries.forEach(entry => {
+        map.set(entry.id, entry);
+      });
+      state.wrongbook = Array.from(map.values());
+    }
+
+    async function applyBulkCodeStatus(action) {
+      const lines = String(state.managementBulkInput || '')
+        .split(/\r?\n/)
+        .map(item => item.trim().toUpperCase())
+        .filter(Boolean);
+      if (!lines.length) {
+        state.managementStatus = '请先在输入框里每行写一个卡密。';
+        render();
+        return;
+      }
+      const resolved = [];
+      const missing = [];
+      for (const code of lines) {
+        const hash = await sha256(code);
+        if (licenseRegistry.has(hash)) resolved.push({ code, hash });
+        else missing.push(code);
+      }
+      resolved.forEach(item => {
+        if (action === 'revoke') state.revokedHashes.add(item.hash);
+        else state.revokedHashes.delete(item.hash);
+      });
+      state.managementLog.unshift(`${new Date().toLocaleString('zh-CN', { hour12: false })} ${action === 'revoke' ? '停用' : '恢复'} ${resolved.length} 个卡密`);
+      state.managementLog = state.managementLog.slice(0, 12);
+      state.managementStatus = action === 'revoke'
+        ? `已停用 ${resolved.length} 个有效卡密。${missing.length ? `未识别 ${missing.length} 个：${missing.join('、')}` : ''}`
+        : `已恢复 ${resolved.length} 个有效卡密。${missing.length ? `未识别 ${missing.length} 个：${missing.join('、')}` : ''}`;
+      if (state.accessProfile?.hash && state.revokedHashes.has(state.accessProfile.hash)) {
+        state.managementStatus += ' 当前家长码已被停用，刷新后将需要重新输入可用卡密。';
+      }
+      render();
+    }
+
+    function exportRevokedList() {
+      const payload = {
+        exportedAt: new Date().toLocaleString('zh-CN', { hour12: false }),
+        revokedHashes: Array.from(state.revokedHashes)
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'ai-super-math-grade6-revoked-codes.json';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      state.managementStatus = `已导出作废清单，共 ${state.revokedHashes.size} 个卡密。`;
+      saveState();
+      render();
+    }
+
+    function importRevokedList(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const payload = JSON.parse(String(reader.result || '{}'));
+          const hashes = Array.isArray(payload.revokedHashes) ? payload.revokedHashes : [];
+          state.revokedHashes = new Set(hashes.filter(hash => licenseRegistry.has(hash)));
+          state.managementLog.unshift(`${new Date().toLocaleString('zh-CN', { hour12: false })} 导入作废清单 ${state.revokedHashes.size} 个`);
+          state.managementLog = state.managementLog.slice(0, 12);
+          state.managementStatus = `已导入作废清单，当前停用 ${state.revokedHashes.size} 个卡密。`;
+          render();
+        } catch (error) {
+          state.managementStatus = '导入失败：文件格式不正确。';
+          render();
+        }
+      };
+      reader.readAsText(file, 'utf-8');
+    }
+
+    function latestReadableMode() {
+      if (state.accessProfile?.tier === 'parent') {
+        return state.latestReport ? 'report' : 'wrongbook';
+      }
+      return 'lesson';
+    }
+
+    function checkVariantAnswer(answer, meta) {
+      if (!answer) {
+        return '你还没有填写答案，先试着自己做一遍。';
+      }
+      if (meta.type === 'choice') {
+        return answer.toUpperCase() === String(meta.answer).toUpperCase()
+          ? `答对了。${meta.explanation || ''}`
+          : `这题还差一点，正确答案是 ${meta.answer}。${meta.explanation || ''}`;
+      }
+      if (meta.type === 'fill') {
+        const normalized = answer.replace(/\s+/g, '').toLowerCase();
+        const correct = (meta.answerText || []).some(item => normalized === String(item).replace(/\s+/g, '').toLowerCase());
+        return correct
+          ? `答对了。${meta.explanation || ''}`
+          : `这题还需要再想想。提示：${meta.explanation || '回到教材定义再看一眼。'}`;
+      }
+      const normalized = answer.toLowerCase();
+      const hitCount = (meta.keywords || []).filter(keyword => normalized.includes(String(keyword).toLowerCase())).length;
+      const ratio = meta.keywords && meta.keywords.length ? hitCount / meta.keywords.length : 0;
+      return ratio >= 0.6
+        ? `思路基本对了。${meta.explanation || ''}`
+        : `这题表达还不够完整。提示：${meta.explanation || '把关键条件、关系和结论补全。'}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value).replace(/`/g, '&#96;');
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+

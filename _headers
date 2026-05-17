@@ -1,0 +1,14 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/index.html
+  Content-Type: text/html; charset=utf-8
+
+/knowledge/*.html
+  Content-Type: text/html; charset=utf-8
+  X-Frame-Options: SAMEORIGIN
+
+/audio/*.mp3
+  Content-Type: audio/mpeg
+  Cache-Control: public, max-age=31536000, immutable

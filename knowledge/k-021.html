@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.1 根据描述标出位置</title>
+  <style>
+    :root{--green:#4caf50;--green-deep:#2f7d33;--green-soft:#eaf8ec;--blue:#66aee8;--blue-soft:#eaf5ff;--ink:#1e3851;--muted:#5f7185;--border:#dbe8f2;--surface:rgba(255,255,255,.96);--shadow:0 20px 45px rgba(35,95,72,.12);--pink-soft:#fff1f7;--pink-deep:#c96b91;--amber:#fff8e8}*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:radial-gradient(circle at top left,rgba(116,214,124,.18),transparent 30%),radial-gradient(circle at top right,rgba(112,181,255,.16),transparent 24%),linear-gradient(180deg,#f4fbf6 0%,#eef8ff 52%,#f9fcff 100%);color:var(--ink);line-height:1.8;padding:20px}.wrap{max-width:980px;margin:0 auto;background:var(--surface);border:1px solid rgba(255,255,255,.82);border-radius:30px;padding:28px;box-shadow:var(--shadow)}.hero,.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.tag,.chip{display:inline-flex;border-radius:999px;background:var(--green-soft);color:var(--green-deep);padding:9px 14px;font-size:14px;font-weight:900}h1,h2,h3,p{margin:0}h1{margin-top:16px;font-size:clamp(30px,4.8vw,46px);line-height:1.12}.lead{margin-top:14px;color:var(--muted);font-weight:750}.card,.panel{border-radius:26px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(247,251,255,.96));box-shadow:0 12px 30px rgba(40,88,64,.06)}.card{padding:20px}.side{background:linear-gradient(135deg,var(--green-soft),var(--blue-soft))}.grid{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:18px}.panel{margin-top:18px;padding:22px}.label{color:var(--muted);font-size:12px;font-weight:900;letter-spacing:.08em}.value{margin-top:8px;font-size:22px;font-weight:950}.steps{margin:12px 0 0;padding-left:20px}.steps li{margin-top:8px;font-weight:750;color:#354c62}.note{margin-top:16px;border-radius:22px;background:var(--pink-soft);color:#74425a;padding:16px;font-weight:850}.teacher{background:linear-gradient(135deg,#f7fff8,#eff7ff)}.btn{border:0;border-radius:18px;background:var(--green);color:white;padding:12px 16px;font-weight:900;cursor:pointer}.btn.secondary{background:var(--blue-soft);color:#2574b4}.btn.pink{background:#f6c1d8;color:#7b2e4d}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.hidden{display:none}.quiz{display:grid;gap:12px;margin-top:14px}.q{border:1px solid var(--border);border-radius:20px;padding:14px;background:white}.q input{width:100%;margin-top:8px;border:1px solid var(--border);border-radius:14px;padding:12px;font:inherit}.feedback{margin-top:10px;font-weight:900}.ok{color:var(--green-deep)}.soft{color:#c05621}.rest{background:var(--amber);color:#73510b}@media(max-width:760px){.hero,.grid{grid-template-columns:1fr}.wrap{padding:18px;border-radius:24px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="card">
+        <div class="tag">人教版六年级上册 · 第2单元 位置与方向（二）</div>
+        <h1 data-read="title">2.1 根据描述标出位置</h1>
+        <div class="actions"><button class="btn" onclick="speakLesson()">朗读讲义</button><button class="btn secondary" onclick="stopLesson()">停止朗读</button></div>
+      </div>
+      <div class="card side"><h3>老师先打个招呼</h3><p class="lead">今天我当你的数学老师。你答错也没关系，错题不是敌人，是给我们递纸条的朋友：它在说“这里再看我一眼”。我们慢慢来。</p></div>
+    </section>
+    <section class="panel teacher"><h2 data-read="heading">概念讲解</h2><p class="lead" data-read="content">位置与方向题要同时说清两个信息：方向和距离。只说“在东北方向”还不够，就像外卖地址只写“小区附近”，骑手会露出复杂的微笑。</p><div class="grid"><div class="card"><div class="label">生活例子 1</div><p class="lead">学校在书店北偏东 40&#176; 方向 600 米处。返回时，书店就在学校南偏西 40&#176; 方向 600 米处。</p></div><div class="card"><div class="label">生活例子 2</div><p class="lead">看地图时先确定观测点，再量角度，最后按比例尺确定距离。观测点换了，描述也会变。</p></div></div><div class="note">小心理建设：数学不是比谁一眼看懂，而是比谁愿意多看一眼。你现在每认真想一次，大脑都在悄悄升级。</div><div class="actions"><button class="btn" onclick="understood()">我理解了，来测试</button><button class="btn pink" onclick="explainAgain()">我还没懂，再讲一遍</button></div></section>
+    <section id="again" class="panel hidden"><h2>换个角度再讲</h2><ul class="steps"><li>“北偏东 40&#176;”和“东偏北 50&#176;”方向相同，但教材里通常按题目给的基准方向表达。</li><li>路线图题不要凭感觉画，先写“从哪里出发”，再一段一段标方向和距离。</li></ul><div class="note rest">如果你已经有点晕，建议站起来喝口水、伸伸腰。数学脑也需要散热，散热不是偷懒，是保养。</div><div class="actions"><button class="btn" onclick="understood()">这次懂了，开始测试</button></div></section>
+    <section id="quiz" class="panel hidden"><h2>分级小测</h2><p class="lead">先从基础题开始。如果错了，我会温和提醒你，不会让数学变成恐怖片。</p><div class="quiz">
+      <div class="q" data-answer="方向和距离"><strong>基础题：</strong>确定位置通常需要哪两个条件？<input placeholder="把答案写在这里" /><button class="btn secondary" onclick="checkOne(this)">检查</button><div class="feedback"></div></div>
+      <div class="q" data-answer="南偏西40&#176;"><strong>提升题：</strong>学校在书店北偏东40&#176;600米处，书店在学校什么方向？<input placeholder="把答案写在这里" /><button class="btn secondary" onclick="checkOne(this)">检查</button><div class="feedback"></div></div>
+      <div class="q" data-answer="东300 北偏西30 200"><strong>挑战题：</strong>从家向东300米，再北偏西30&#176;走200米到学校，请写出两段路线关键词。<input placeholder="把答案写在这里" /><button class="btn secondary" onclick="checkOne(this)">检查</button><div class="feedback"></div></div>
+      <div class="q" data-answer="distance"><strong>英文迁移：</strong>Position needs direction and ____.<input placeholder="Try in English or numbers" /><button class="btn secondary" onclick="checkOne(this)">Check</button><div class="feedback"></div></div>
+    </div></section>
+  </main>
+  <script>
+    let misses = 0;
+    function lessonReadText(){ return Array.from(document.querySelectorAll('[data-read]')).map(el => el.innerText.trim()).filter(Boolean).join('。').replace(/\s+/g, ' ').slice(0, 1100); }
+    function speakLesson(){ const text = lessonReadText(); if (window.parent && window.parent !== window && typeof window.parent.speakLessonText === 'function') { window.parent.speakLessonText(text); return; } if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') { alert('当前浏览器暂不支持朗读。可以换用手机自带浏览器或 Chrome / Safari 再试一次。'); return; } speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'zh-CN'; u.rate = 0.95; speechSynthesis.speak(u); setTimeout(() => { if (speechSynthesis.paused) speechSynthesis.resume(); }, 120); }
+    function stopLesson(){ if (window.parent && window.parent !== window && typeof window.parent.stopLessonReading === 'function') { window.parent.stopLessonReading(); return; } if ('speechSynthesis' in window) speechSynthesis.cancel(); }
+    function understood(){ document.getElementById('quiz').classList.remove('hidden'); document.getElementById('quiz').scrollIntoView({behavior:'smooth'}); }
+    function explainAgain(){ document.getElementById('again').classList.remove('hidden'); document.getElementById('again').scrollIntoView({behavior:'smooth'}); }
+    function clean(s){ return String(s || '').toLowerCase().replace(/[\s，。,.％%厘米cm米m°度]/g,'').replace('：',':').replace('∶',':'); }
+    function checkOne(btn){ const box = btn.closest('.q'); const input = box.querySelector('input'); const fb = box.querySelector('.feedback'); const expected = box.dataset.answer; const got = input.value; const ok = clean(got).includes(clean(expected)) || clean(expected).includes(clean(got)); if(ok && clean(got)){ fb.className='feedback ok'; fb.textContent='答对啦！这一步很稳，数学老师的嘴角已经开始上扬。'; } else { misses++; fb.className='feedback soft'; fb.textContent='差一点点。别急，这不是你不行，而是这个点还没完全坐稳。参考方向：' + expected + '。我们把题目里的关键词再圈一遍。'; if(misses >= 2){ fb.textContent += ' 你已经连续思考很久了，可以休息 2 分钟，活动一下肩颈再回来。'; } } }
+    window.addEventListener('message', event => { if (event.data && event.data.enabled === false) speechSynthesis.cancel(); });
+  </script>
+</body>
+</html>
+
